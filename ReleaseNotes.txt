@@ -4,6 +4,12 @@ Documentation   : https://support.freshdesk.com
 Support Email   : support@freshdesk.com
 Version         : 1.1.0
 
+Ver 1.1.1
+__________________________
+Bug fixes:
+    - Fixes an issue in the JWT authentication flow where the `authenticate` event was not emitted by the SDK for new user.
+
+
 Ver 1.1.0
 __________________________
 Enhancement:
