@@ -2,7 +2,7 @@ Freshdesk iOS SDK - Powered by Freshworks
 
 Documentation   : https://support.freshdesk.com
 Support Email   : support@freshdesk.com
-Version         : 1.1.0
+Version         : 1.1.1
 
 Ver 1.1.1
 __________________________
