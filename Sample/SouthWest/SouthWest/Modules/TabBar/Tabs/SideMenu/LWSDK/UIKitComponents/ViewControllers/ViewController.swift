@@ -59,7 +59,7 @@ final class ViewController: UIViewController {
             self?.showToast(message: Constants.Toast.userResetSuccess)
         }
         //Rest user with success and failure
-        Freshworks.shared.resetUser(
+        Freshdesk.resetUser(
             onSuccess: {
                 self.showToast(message: Constants.Toast.userResetSuccess)
             },
