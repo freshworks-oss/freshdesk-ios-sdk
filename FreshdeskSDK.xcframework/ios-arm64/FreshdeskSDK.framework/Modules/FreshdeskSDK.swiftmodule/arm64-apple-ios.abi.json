@@ -4095,7 +4095,7 @@
       "kind": "StringLiteral",
       "offset": 1147,
       "length": 7,
-      "value": "\"1.1.1\""
+      "value": "\"1.1.2\""
     },
     {
       "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/Common\/FDConstants.swift",
@@ -4660,7 +4660,7 @@
     {
       "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/View\/SDKWebViewController+ReverseCommunication.swift",
       "kind": "BooleanLiteral",
-      "offset": 9387,
+      "offset": 10027,
       "length": 5,
       "value": "false"
     },
@@ -4709,7 +4709,7 @@
     {
       "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/Core\/FreshdeskManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 975,
+      "offset": 1013,
       "length": 1,
       "value": "0"
     },

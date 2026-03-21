@@ -62,7 +62,7 @@
 		56EAEFC32B7B9B3800B93D9A /* ConfigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EAEFC22B7B9B3800B93D9A /* ConfigureView.swift */; };
 		7C3F85E42EBB744500B40EE5 /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */; };
 		7C6E58392B3AF68B008C7EF5 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E58382B3AF68B008C7EF5 /* Configurations.swift */; };
-		976C49DB2F6483C900A2679A /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 976C49DA2F6483C900A2679A /* FreshdeskSDK */; };
+		97CEA0EB2F6E7F1A0072A3C8 /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 97CEA0EA2F6E7F1A0072A3C8 /* FreshdeskSDK */; };
 		97DE59522E756ED3000E5526 /* ShowUserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE59512E756ED3000E5526 /* ShowUserDetailsView.swift */; };
 		ADE3A1E02B6000B900C84D77 /* PropertiesViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE3A1DF2B6000B900C84D77 /* PropertiesViewData.swift */; };
 		E4FA97652C34100300B3B52F /* PreChatFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FA97642C34100300B3B52F /* PreChatFormView.swift */; };
@@ -137,7 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C3F85E42EBB744500B40EE5 /* FreshdeskSDK in Frameworks */,
-				976C49DB2F6483C900A2679A /* FreshdeskSDK in Frameworks */,
+				97CEA0EB2F6E7F1A0072A3C8 /* FreshdeskSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +492,7 @@
 			name = SouthWest;
 			packageProductDependencies = (
 				7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */,
-				976C49DA2F6483C900A2679A /* FreshdeskSDK */,
+				97CEA0EA2F6E7F1A0072A3C8 /* FreshdeskSDK */,
 			);
 			productName = SouthWest;
 			productReference = 56A5C2AE2AF9063E00736CF5 /* SouthWest.app */;
@@ -523,7 +523,7 @@
 			);
 			mainGroup = 56A5C2A52AF9063E00736CF5;
 			packageReferences = (
-				976C49D92F6483C900A2679A /* XCRemoteSwiftPackageReference "freshdesk-ios-sdk" */,
+				97CEA0E92F6E7F1A0072A3C8 /* XCRemoteSwiftPackageReference "freshdesk-ios-sdk" */,
 			);
 			productRefGroup = 56A5C2AF2AF9063E00736CF5 /* Products */;
 			projectDirPath = "";
@@ -814,7 +814,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		976C49D92F6483C900A2679A /* XCRemoteSwiftPackageReference "freshdesk-ios-sdk" */ = {
+		97CEA0E92F6E7F1A0072A3C8 /* XCRemoteSwiftPackageReference "freshdesk-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/freshworks/freshdesk-ios-sdk";
 			requirement = {
@@ -829,9 +829,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = FreshdeskSDK;
 		};
-		976C49DA2F6483C900A2679A /* FreshdeskSDK */ = {
+		97CEA0EA2F6E7F1A0072A3C8 /* FreshdeskSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 976C49D92F6483C900A2679A /* XCRemoteSwiftPackageReference "freshdesk-ios-sdk" */;
+			package = 97CEA0E92F6E7F1A0072A3C8 /* XCRemoteSwiftPackageReference "freshdesk-ios-sdk" */;
 			productName = FreshdeskSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
