@@ -15,27 +15,16 @@ struct BorderedTextfield: View {
     @Binding var value: String
     
     var body: some View {
-        if #available(iOS 15.0, *) {
-            TextField(Constants.Characters.emptyString, text: $value, prompt: Text(placeholder).foregroundColor(.gray))
+        ZStack(alignment: .leading) {
+                   TextField(Constants.Characters.emptyString, text: $value)
                 .accessibilityIdentifier(placeholder)
+                .foregroundColor(textColor)
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(borderColor, lineWidth: 1)
                 )
                 .background(Color.clear)
-                .foregroundColor(textColor)
-        } else {
-            ZStack(alignment: .leading) {
-                TextField(Constants.Characters.emptyString, text: $value)
-                    .accessibilityIdentifier(placeholder)
-                    .foregroundColor(textColor)
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(borderColor, lineWidth: 1)
-                    )
-                    .background(Color.clear)
                 if value.isEmpty {
                     Text(placeholder)
                         .foregroundColor(.gray)
@@ -44,7 +33,7 @@ struct BorderedTextfield: View {
             }
         }
     }
-}
+
 
 struct BorderedTextfield_Previews: PreviewProvider {
     static var previews: some View {

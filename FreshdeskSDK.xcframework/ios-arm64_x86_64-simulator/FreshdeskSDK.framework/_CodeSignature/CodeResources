@@ -10,47 +10,47 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		gP/tWZrbEHozqCrU9v4UdzXnoO4=
+		d0JW94nSRnwj88/vFEPEq1SwMmA=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		Nw2VNczmxszgwg8VTgwO2mbiOSY=
+		ktfR4E91NEyQZF4rX/BQCAD5KuU=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		YktNov6WGkWkMVuVzovrJ30JQP4=
+		F0GGa8EHMzy3b5/shnRb6cN8imk=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		rfrt3/80Z+CLMORQvceW8yGMf2E=
+		AKawIoVja2DplnvtQouCkxetyxo=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		YktNov6WGkWkMVuVzovrJ30JQP4=
+		F0GGa8EHMzy3b5/shnRb6cN8imk=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		kSgKOLW9LRTbO+EN77bci1F/CAo=
+		L4ZN+P53p7WB/tG90KJx6eHabCw=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		Nw2VNczmxszgwg8VTgwO2mbiOSY=
+		ktfR4E91NEyQZF4rX/BQCAD5KuU=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		p6Vgv4Wn9Gk76mq+kYFZ3oA2ZzU=
+		b57pgebzQBTxC7FEHJd2wsw3qqg=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		iI0sKXnv4MVh5yN4zpE5xeJ9EN0=
+		pYYO1myKm54CHP/5Q8r6jVlEsRo=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		p6Vgv4Wn9Gk76mq+kYFZ3oA2ZzU=
+		b57pgebzQBTxC7FEHJd2wsw3qqg=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		7mTiAeE7g/R/mf7jsaz3xOtGqmc=
+		D7poQTXdfKXz2cQiQrhEE1U0SEc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -78,70 +78,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qKvEYHZdGXpD++JHszU6HI2iqHXECKcs7oktrF7OVYU=
+			pxz2HbesLGcyC/xzgZV2lm/2ocmvLqU4V6jwvqau5/g=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ELpPu8vYX3S2gJIQ9YzXx+tE1673iWX3gGqGBoB+674=
+			xUroZpkgONE6bzCysrEW0KXLchkovTBKT/ktzhTyZTA=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dlo5AT87eCqvEd6NiZVPl+cKq4s8+qTcFZBrF65VYSk=
+			1XIibSaqSR9nRwx1NCHl8L2SoN+M69//ZRixgQGlDuk=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ELpPu8vYX3S2gJIQ9YzXx+tE1673iWX3gGqGBoB+674=
+			xUroZpkgONE6bzCysrEW0KXLchkovTBKT/ktzhTyZTA=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			warSlidExqjVPeUQ6uthkoLBIQ8v6qxPywqMc+9iPoA=
+			sKFkrmeLrvgxK7IP6ztaAzw2gk3zcvJBHqW5BbS5Ysw=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qKvEYHZdGXpD++JHszU6HI2iqHXECKcs7oktrF7OVYU=
+			pxz2HbesLGcyC/xzgZV2lm/2ocmvLqU4V6jwvqau5/g=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			okhT+wpmQhaqjQSueIfiWSli84kHDW7lp2k2r0/bDW0=
+			rW60JrBJpduwTXU3csCCIL7LFuHPBp0zE2PBZdF56lU=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q5t39NSlARe33osT8fAwujBT9iFbuhdfMznvwzIMwa0=
+			X2CLkTZFttTkKdjal/OcPC52Ilpn+g9cFIhWDBDGE5g=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			okhT+wpmQhaqjQSueIfiWSli84kHDW7lp2k2r0/bDW0=
+			rW60JrBJpduwTXU3csCCIL7LFuHPBp0zE2PBZdF56lU=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Oxno57P97soiEmcXrkKJ0Ra8qkHDj6xM6a8h2YFwBSw=
+			GWh+NOnRhDYqt0T8xL0NBN6Fp/1eK5et5pTSYfqINSo=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

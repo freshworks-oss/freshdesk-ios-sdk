@@ -2255,13 +2255,6 @@
       },
       {
         "kind": "Import",
-        "name": "SwiftUI",
-        "printedName": "SwiftUI",
-        "declKind": "Import",
-        "moduleName": "FreshdeskSDK"
-      },
-      {
-        "kind": "Import",
         "name": "SystemConfiguration",
         "printedName": "SystemConfiguration",
         "declKind": "Import",
@@ -3206,6 +3199,23 @@
         "declAttributes": [
           "RawDocComment"
         ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "FreshdeskSDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "FreshdeskSDK"
       },
       {
         "kind": "Import",
@@ -4681,7 +4691,7 @@
     {
       "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/View\/SDKInAppNotificationBanner.swift",
       "kind": "BooleanLiteral",
-      "offset": 3611,
+      "offset": 3440,
       "length": 4,
       "value": "true"
     },
@@ -4827,8 +4837,15 @@
     },
     {
       "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/Core\/Freshworks.swift",
+      "kind": "IntegerLiteral",
+      "offset": 335,
+      "length": 9,
+      "value": "9990014"
+    },
+    {
+      "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/Core\/Freshworks.swift",
       "kind": "BooleanLiteral",
-      "offset": 724,
+      "offset": 2329,
       "length": 5,
       "value": "false"
     },
