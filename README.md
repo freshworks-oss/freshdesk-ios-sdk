@@ -4,7 +4,7 @@ Freshdesk iOS SDK
 "Modern ticket software that your sales and customer engagement teams will love [FreshdeskSDK](https://www.freshworks.com)."
 
 ## Installation
-Freshchat iOS SDK is compatible with iOS 17+ devices, and delivers the best experience on iOS 18.5 and newer versions.
+Freshdesk iOS SDK is compatible with iOS 17+ devices, and delivers the best experience on iOS 18.5 and newer versions.
 
 ### Swift Package Manager
 Add https://github.com/freshworks/freshdesk-ios-sdk as a Swift Package Repository in Xcode and follow the instructions to add FreshdeskSDK as a Swift Package.
@@ -20,7 +20,9 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
                                        host: "your-host-url",
                                        sdkId: "your-sdk-id",
                                        jwtToken: "your-user-jwt-token",
-                                       locale: "your-apps-locale"
+                                       locale: "your-apps-locale",
+                                       config: "your-content-config"
+                                       
     )
     Freshdesk.initialize(with: sdkConfig)
     registerNotifications() // For notification related, check PushNotification section at the last
@@ -117,7 +119,7 @@ To get unread count in real time add a notification observer as defined below
 ```
 
 ### PushNotifications
-Freshchat SDK supports push notifications only through a .p8 certificate. Make sure to upload your .p8 push certificate in portal via Select settings -> Mobile Chat SDK -> Select a SDK needed -> Push Notification and update Authkey and TeamId value.
+Freshdesk SDK supports push notifications only through a .p8 certificate. Make sure to upload your .p8 push certificate in portal via Select settings -> Mobile Chat SDK -> Select a SDK needed -> Push Notification and update Authkey and TeamId value.
 Request for notification permission if granted register the token with Freshdesk.
 ```swift
    extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -185,7 +187,8 @@ Step 2: Initiate the SDK with the above JWT.
                                        host: "your-host-url",
                                        sdkId: "your-sdk-id",
                                        jwtToken: "your-user-jwt-token",
-                                       locale: "your-apps-locale"
+                                       locale: "your-apps-locale",
+                                       config: "your-content-config"
     )
     Freshdesk.initialize(with: sdkConfig)
 ```
@@ -221,6 +224,75 @@ Freshdesk.authenticateAndUpdate(jwt: "<valid-JWT>")
 ```
 
 Note: The above API (Freshdesk.authenticateAndUpdate) will also be responsible for updating the user details and ticket properties. While creating the JWT, the details which need to be updated should be added in the payload. (Same api can be used while migrating from non verified to verified user)
+
+### Content Configuration / Localisation
+- Use `ContentConfiguration` to customise static text shown in the widget — for example chat header, FAQ labels, placeholders, ticket form text, privacy policy banner, and response-time messages. Any field you do not set will use the widget default.
+
+- To apply content configuration during SDK initialization, pass it through `Configuration` in `FreshdeskSDKConfig`:
+    ```swift
+    let content = ContentConfiguration(
+        headers: HeaderContent(
+            chat: "Talk to our team",
+            faq: "Help Centre",
+            typicallyRepliesFewMinsFallback: "Typically replies in a few minutes",
+            channelResponse: ChannelResponseContent(
+                offline: "We are away right now",
+                online: ChannelResponseOnlineContent(
+                    defaultMessage: "We typically reply in a few minutes",
+                    minutes: ChannelResponseTimeUnitContent(
+                        one: "Typically replies in {{time}} minute",
+                        more: "Typically replies in {{time}} minutes"
+                    ),
+                    hours: ChannelResponseTimeUnitContent(
+                        one: "Typically replies in {{time}} hour",
+                        more: "Typically replies in {{time}} hours"
+                    )
+                )
+            ),
+            ticketForm: TicketFormContent(
+                title: "Raise a ticket",
+                submitBtnTitle: "Submit"
+            )
+        ),
+        placeholders: PlaceholderContent(
+            replyField: "Type your reply...",
+            searchField: "Search articles..."
+        ),
+        privacyPolicySetting: PrivacyPolicyContent(
+            privacyPolicyMessage: "We respect your privacy",
+            privacyPolicyLinkText: "Privacy Policy",
+            privacyPolicyLink: "https://example.com/privacy"
+        ),
+        actions: ActionContent(tabChat: "Chat")
+    )
+
+    let sdkConfig = FreshdeskSDKConfig(
+        token: "your-account-token",
+        host: "your-host-url",
+        sdkId: "your-sdk-id",
+        jwtToken: "your-user-jwt-token",
+        locale: "your-apps-locale",
+        config: Configuration(content: content)
+    )
+    Freshdesk.initialize(with: sdkConfig)
+    ```
+
+- To update content configuration after initialization:
+    ```swift
+    Freshdesk.setContentConfiguration(
+        ContentConfiguration(
+            headers: HeaderContent(chat: "Chat now"),
+            placeholders: PlaceholderContent(replyField: "Your message...")
+        )
+    )
+    ```
+
+- To reset content configuration to widget defaults:
+    ```swift
+    Freshdesk.setContentConfiguration(ContentConfiguration())
+    ```
+
+    Note: `setContentConfiguration` persists the updated values and refreshes the widget so changes take effect immediately.
 
 ### Custom link handler
 ```swift
