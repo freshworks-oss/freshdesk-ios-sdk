@@ -2,7 +2,12 @@ Freshdesk iOS SDK - Powered by Freshworks
 
 Documentation   : https://support.freshdesk.com
 Support Email   : support@freshdesk.com
-Version         : 1.1.3
+Version         : 1.2.0
+
+Ver 1.2.0
+__________________________
+Enhancements:
+    - Added support to override the SDK’s built-in default static strings, including support for customizing additional locales beyond the default language through locale string overrides configured during SDK initialization.
 
 Ver 1.1.3
 __________________________

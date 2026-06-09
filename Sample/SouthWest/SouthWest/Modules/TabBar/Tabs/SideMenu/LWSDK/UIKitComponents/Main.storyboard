@@ -299,12 +299,14 @@
                                                             <action selector="didTapGetUser:" destination="sjQ-03-CbW" eventType="touchUpInside" id="NrI-Vw-gC6"/>
                                                         </connections>
                                                     </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0e-GX-uBW">
-                                                        <rect key="frame" x="160.33333333333334" y="442" width="187.00000000000003" height="0.0"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0e-GX-uBW" userLabel="Set Localisation Config">
+                                                        <rect key="frame" x="160.33333333333334" y="442" width="187.00000000000003" height="29"/>
                                                         <color key="backgroundColor" name="buttonDarkBlack"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="   Set config for localisation   "/>
+                                                        <state key="normal" title="   Set Localisation Config   ">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="14"/>

@@ -24,24 +24,29 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func initializeFreshworksSDK() {
-            if let sdkConfig =  UserDefaults.standard.getSDKConfig() {
-                Freshdesk.initialize(with: sdkConfig)
-            } else {
-                let sdkConfig = FreshdeskSDKConfig(token: Configurations.Account.token,
-                                                   host: Configurations.Account.host,
-                                                   sdkId: Configurations.Account.sdkId,
-                                                   jwtToken: Configurations.Account.jwt,
-                                                   locale: Configurations.Account.locale,
-                                                   shouldEnableLogs: true
-                )
-                
-                
-                Freshdesk.initialize(with: sdkConfig)
-                UserDefaults.standard.updateSDKConfig(sdkConfig, locale: Configurations.Account.locale)
-            }
-        Freshdesk.enableDebugLogs(true)
-            
+        // Load any developer-entered ContentConfiguration from a previous run so that
+        // localisation overrides set in the sample app survive across launches and
+        // are applied at SDK init time (not only at runtime via setContentConfiguration).
+        let configuration = Configuration(content: UserDefaults.standard.sampleContentConfiguration ?? ContentConfiguration())
+
+        if var sdkConfig = UserDefaults.standard.getSDKConfig() {
+            sdkConfig.config = configuration
+            Freshdesk.initialize(with: sdkConfig)
+        } else {
+            let sdkConfig = FreshdeskSDKConfig(token: Configurations.Account.token,
+                                               host: Configurations.Account.host,
+                                               sdkId: Configurations.Account.sdkId,
+                                               jwtToken: Configurations.Account.jwt,
+                                               locale: Configurations.Account.locale,
+                                               config: configuration,
+                                               shouldEnableLogs: true
+            )
+
+            Freshdesk.initialize(with: sdkConfig)
+            UserDefaults.standard.updateSDKConfig(sdkConfig, locale: Configurations.Account.locale)
         }
+        Freshdesk.enableDebugLogs(true)
+    }
     
 }
 

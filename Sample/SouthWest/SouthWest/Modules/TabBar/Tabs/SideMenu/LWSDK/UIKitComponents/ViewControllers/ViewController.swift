@@ -245,33 +245,31 @@ extension ViewController {
     }
     
     @IBAction func didSetConfigForLocalisation(_ sender: Any) {
-        let setConfigLocalisationView = SetConfigLocalisationView { (headerProperty, content, toBeDismissed)  in
-            self.dismiss(animated: false) {
-                if !toBeDismissed {
-                    typealias jsonDictionary = [String: Any]
-                    var headerPropertyJSONData: jsonDictionary? = nil
-                    var contentPropertyJSONData: jsonDictionary? = nil
-                    
-                    do{
-                        if !headerProperty.isEmpty, let headerPropertyJson = headerProperty.data(using: String.Encoding.utf8) {
-                            if let headerPropertyDecodedData = try JSONDecoder().decode(AnyCodable.self, from: headerPropertyJson).value as? [String: Any] {
-                                headerPropertyJSONData = headerPropertyDecodedData
-                            }
-                        }
-                        
-                        if !content.isEmpty, let contentPropertyJson = content.data(using: String.Encoding.utf8) {
-                            if let contentPropertyDecodedData = try JSONDecoder().decode(AnyCodable.self, from: contentPropertyJson).value as? [String: Any] {
-                                contentPropertyJSONData = contentPropertyDecodedData
-                            }
-                        }
-                    } catch {
-                        print("Error with handling json: \(error.localizedDescription)")
-                    }
-                    
+        let setConfigLocalisationView = SetConfigLocalisationView { [weak self] action in
+            guard let self = self else { return }
+            switch action {
+            case .dismiss:
+                self.dismiss(animated: false)
+
+            case .applyRuntime(let config):
+                self.dismiss(animated: false) {
+                    Freshdesk.setContentConfiguration(config)
+                    self.showToast(message: Constants.Features.LocalisationConfig.appliedRuntime)
+                }
+
+            case .saveForNextLaunch(_):
+                self.dismiss(animated: false) {
+                    self.showToast(message: Constants.Features.LocalisationConfig.savedForNextLaunch)
+                }
+
+            case .reset:
+                self.dismiss(animated: false) {
+                    Freshdesk.setContentConfiguration(ContentConfiguration())
+                    self.showToast(message: Constants.Features.LocalisationConfig.resetDone)
                 }
             }
         }
-        
+
         present(setConfigLocalisationView)
     }
     

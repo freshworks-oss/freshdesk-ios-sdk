@@ -37,6 +37,47 @@ extension UserDefaults {
         //Header and content property
         removeObject(forKey: Constants.UserDefaultsKeys.headerProperty)
         removeObject(forKey: Constants.UserDefaultsKeys.contentProperty)
+
+        //ContentConfiguration for localisation testing
+        removeObject(forKey: Constants.UserDefaultsKeys.contentConfiguration)
+    }
+}
+
+// Extension to UserDefaults to persist a ContentConfiguration value used by the
+// sample app so the developer-entered localisation overrides survive app launches.
+// Note: The SDK persists its own copy internally when `setContentConfiguration` is
+// called; this app-side copy is used to pre-populate the form and to feed the
+// `Configuration(content:)` parameter at SDK init time on next launch.
+extension UserDefaults {
+    var sampleContentConfiguration: ContentConfiguration? {
+        get {
+            guard let data = data(forKey: Constants.UserDefaultsKeys.contentConfiguration) else {
+                return nil
+            }
+            return try? JSONDecoder().decode(ContentConfiguration.self, from: data)
+        }
+        set {
+            if let value = newValue,
+               !value.isSampleEmpty,
+               let data = try? JSONEncoder().encode(value) {
+                set(data, forKey: Constants.UserDefaultsKeys.contentConfiguration)
+            } else {
+                removeObject(forKey: Constants.UserDefaultsKeys.contentConfiguration)
+            }
+        }
+    }
+}
+
+// The SDK's `ContentConfiguration.isEmpty` is internal, so we re-derive the same
+// check here for the sample app's persistence layer. This keeps the form behavior
+// identical to the SDK's own emptiness check without exposing internal API.
+extension ContentConfiguration {
+    var isSampleEmpty: Bool {
+        headers == nil &&
+        placeholders == nil &&
+        privacyPolicySetting == nil &&
+        actions == nil &&
+        additionalFields.isEmpty
     }
 }
 

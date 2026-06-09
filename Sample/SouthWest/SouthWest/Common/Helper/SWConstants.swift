@@ -145,38 +145,109 @@ struct Constants {
         
         struct LocalisationConfig {
             
-            static let title = "Set localisation config"
-            static let subheading = ""
-            static let mainButton = "Update config data"
-            
-            static let headerPropertyTitle = "Header property"
-            static let headerPropertyPlaceholder = "Enter header property Json here"
-            static let headerPropertyDescription = """
+            static let title = "Set Localisation Config"
+            static let subheading = "Override widget UI strings. Empty fields fall back to widget defaults. \"Apply Now\" triggers an SDK reInit, \"Save\" persists for the next launch."
+            static let mainButton = "Apply Now (Runtime)"
+            static let saveButton = "Save for Next Launch"
+            static let resetButton = "Reset All"
+
+            // Section headings
+            static let sectionHeaders = "Headers"
+            static let sectionChannelResponse = "Headers \u{2192} Channel Response"
+            static let sectionChannelResponseOnline = "Headers \u{2192} Channel Response \u{2192} Online"
+            static let sectionChannelResponseOnlineMinutes = "Headers \u{2192} Channel Response \u{2192} Online \u{2192} Minutes"
+            static let sectionChannelResponseOnlineHours = "Headers \u{2192} Channel Response \u{2192} Online \u{2192} Hours"
+            static let sectionTicketForm = "Headers \u{2192} Ticket Form"
+            static let sectionPlaceholders = "Placeholders"
+            static let sectionActions = "Actions"
+            static let sectionPrivacy = "Privacy Policy Setting"
+            static let sectionAdditional = "Additional Fields (Overflow / Future Keys)"
+
+            // Headers
+            static let chatTitle = "headers.chat"
+            static let chatPlaceholder = "e.g. Chat with us"
+            static let faqTitle = "headers.faq"
+            static let faqPlaceholder = "e.g. Help Centre"
+            static let faqMessageUsTitle = "headers.faq_message_us"
+            static let faqMessageUsPlaceholder = "e.g. Message us"
+            static let faqNotAvailableTitle = "headers.faq_not_available"
+            static let faqNotAvailablePlaceholder = "e.g. FAQs not available"
+            static let faqSearchNotAvailableTitle = "headers.faq_search_not_available"
+            static let faqSearchNotAvailablePlaceholder = "e.g. No results found"
+            static let faqThankyouTitle = "headers.faq_thankyou"
+            static let faqThankyouPlaceholder = "e.g. Thanks for the feedback"
+            static let faqUsefulTitle = "headers.faq_useful"
+            static let faqUsefulPlaceholder = "e.g. Was this useful?"
+            static let faqNotUsefulTitle = "headers.faq_not_useful"
+            static let faqNotUsefulPlaceholder = "e.g. Not useful"
+            static let typicallyRepliesFallbackTitle = "headers.typically_replies_few_mins_fallback"
+            static let typicallyRepliesFallbackPlaceholder = "e.g. Typically replies in a few minutes"
+
+            // Channel response
+            static let offlineTitle = "channel_response.offline"
+            static let offlinePlaceholder = "e.g. We are away right now"
+
+            // Channel response \u{2192} online
+            static let onlineDefaultTitle = "channel_response.online.default"
+            static let onlineDefaultPlaceholder = "e.g. We typically reply in a few minutes"
+
+            // Channel response \u{2192} online \u{2192} minutes
+            static let onlineMinutesOneTitle = "channel_response.online.minutes.one"
+            static let onlineMinutesOnePlaceholder = "e.g. Typically replies in {{time}} minute"
+            static let onlineMinutesMoreTitle = "channel_response.online.minutes.more"
+            static let onlineMinutesMorePlaceholder = "e.g. Typically replies in {{time}} minutes"
+
+            // Channel response \u{2192} online \u{2192} hours
+            static let onlineHoursOneTitle = "channel_response.online.hours.one"
+            static let onlineHoursOnePlaceholder = "e.g. Typically replies in {{time}} hour"
+            static let onlineHoursMoreTitle = "channel_response.online.hours.more"
+            static let onlineHoursMorePlaceholder = "e.g. Typically replies in {{time}} hours"
+
+            // Ticket form
+            static let ticketTitleTitle = "ticket_form.title"
+            static let ticketTitlePlaceholder = "e.g. Raise a ticket"
+            static let ticketListTitleTitle = "ticket_form.list_title"
+            static let ticketListTitlePlaceholder = "e.g. Choose a form"
+            static let ticketSubmitTitle = "ticket_form.submit_btn_title"
+            static let ticketSubmitPlaceholder = "e.g. Submit"
+            static let ticketConfirmationTitle = "ticket_form.confirmation_message"
+            static let ticketConfirmationPlaceholder = "e.g. We have received your request"
+
+            // Placeholders
+            static let replyFieldTitle = "placeholders.reply_field"
+            static let replyFieldPlaceholder = "e.g. Type your reply..."
+            static let searchFieldTitle = "placeholders.search_field"
+            static let searchFieldPlaceholder = "e.g. Search articles..."
+
+            // Actions
+            static let tabChatTitle = "actions.tab_chat"
+            static let tabChatPlaceholder = "e.g. Chat"
+
+            // Privacy policy
+            static let privacyMessageTitle = "privacy_policy_setting.privacy_policy_message"
+            static let privacyMessagePlaceholder = "e.g. We respect your privacy"
+            static let privacyLinkTextTitle = "privacy_policy_setting.privacy_policy_link_text"
+            static let privacyLinkTextPlaceholder = "e.g. Privacy Policy"
+            static let privacyLinkTitle = "privacy_policy_setting.privacy_policy_link"
+            static let privacyLinkPlaceholder = "e.g. https://example.com/privacy"
+
+            // Additional fields
+            static let additionalTitle = "additional_fields (JSON)"
+            static let additionalPlaceholder = "Optional JSON for any custom widget keys not yet typed in the SDK"
+            static let additionalDescription = """
+                Optional. Paste a JSON object whose keys will be merged at the top level of \
+                the encoded `content`. Use this for new widget keys that aren't yet exposed \
+                as typed properties on ContentConfiguration. Example:
                 {
-                 Please enter the header property value in the below format:
-                
-                   "appName": "Freshworks sample app",
-                   "appLogo": "https://d1qb2nb5cznatu.cloudfront.net/startups/i/2473-2c38490d8e4c91660d86ff54ba5391ea-medium_jpg.jpg"
+                  "custom_banner": "Hello",
+                  "new_section": { "title": "Coming soon" }
                 }
                 """
 
-            static let contentPropertyTitle = "Content property"
-            static let contentPropertyPlaceholder = "Enter content property Json here"
-            static let contentPropertyDescription = """
-               {
-                Please enter the content property value in the below format:
-               
-                   "welcomeMessage": "Hello Welcome",
-                   "headers": {
-                       "faq": "Faqs-Sections",
-                       "chat": "Chat with us - Say Hi",
-                       "csat_question": "Did we address your queries??"
-                   },
-                   "placeholders": {
-                       "search_field": "Search here"
-                   }
-               }
-               """
+            // Toast messages
+            static let appliedRuntime = "Content config applied at runtime"
+            static let savedForNextLaunch = "Saved. Will apply on next app launch"
+            static let resetDone = "Content config reset to widget defaults"
         }
         
         struct OpenSpecificConversation {
@@ -356,6 +427,7 @@ struct Constants {
         static let userProperties = "fw_userProperties"
         static let headerProperty = "fw_headerProperty"
         static let contentProperty = "fw_contentProperty"
+        static let contentConfiguration = "fw_contentConfiguration"
         static let preChatFormTemplate = "fw_preChatFormTemplate"
         
         
