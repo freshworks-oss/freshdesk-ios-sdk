@@ -1,14 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64-apple-ios17.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name FreshdeskSDK
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.3.2 effective-5.10 (swiftlang-6.3.2.1.108 clang-2100.1.1.101)
+// swift-module-flags: -target arm64-apple-ios17.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name FreshdeskSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.2
 import Foundation
 import Swift
 import SwiftUI
 import SystemConfiguration
 import UIKit
 import UserNotifications
-import WebKit
+@preconcurrency import WebKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
@@ -27,6 +27,34 @@ public enum UserState : Swift.String {
   public var rawValue: Swift.String {
     get
   }
+}
+public enum FDDiagnosticStatus : Swift.String {
+  case pass
+  case warn
+  case fail
+  case skipped
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct FDDiagnosticCheck {
+  public let id: Swift.String
+  public let title: Swift.String
+  public let status: FreshdeskSDK.FDDiagnosticStatus
+  public let details: Swift.String
+  public let fixHint: Swift.String?
+  public init(id: Swift.String, title: Swift.String, status: FreshdeskSDK.FDDiagnosticStatus, details: Swift.String, fixHint: Swift.String? = nil)
+}
+public struct FDDiagnosticReport {
+  public let sdkVersion: Swift.String
+  public let generatedAt: Foundation.Date
+  public let overall: FreshdeskSDK.FDDiagnosticStatus
+  public let checks: [FreshdeskSDK.FDDiagnosticCheck]
+  public init(sdkVersion: Swift.String, generatedAt: Foundation.Date, overall: FreshdeskSDK.FDDiagnosticStatus, checks: [FreshdeskSDK.FDDiagnosticCheck])
+  public func prettyPrinted() -> Swift.String
+  public func toJSON() -> Swift.String
 }
 public struct AnyCodable : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
@@ -161,6 +189,7 @@ extension FreshdeskSDK.Freshworks {
   nonisolated final public func openKnowledgeBase(_ viewController: UIKit.UIViewController)
   nonisolated final public func getUnreadCount() -> Swift.Int
   nonisolated final public func getSDKVersion() -> Swift.String
+  nonisolated final public func runDiagnostics(completion: @escaping (FreshdeskSDK.FDDiagnosticReport) -> Swift.Void)
   nonisolated final public func setCustomLinkHandler(handler: @escaping (Foundation.URL) -> ())
   nonisolated final public func dismissFreshdeskSDKViews()
 }
@@ -184,6 +213,9 @@ extension FreshdeskSDK.Freshworks {
 extension FreshdeskSDK.UserState : Swift.Equatable {}
 extension FreshdeskSDK.UserState : Swift.Hashable {}
 extension FreshdeskSDK.UserState : Swift.RawRepresentable {}
+extension FreshdeskSDK.FDDiagnosticStatus : Swift.Equatable {}
+extension FreshdeskSDK.FDDiagnosticStatus : Swift.Hashable {}
+extension FreshdeskSDK.FDDiagnosticStatus : Swift.RawRepresentable {}
 extension FreshdeskSDK.FDEvents : Swift.Equatable {}
 extension FreshdeskSDK.FDEvents : Swift.Hashable {}
 extension FreshdeskSDK.FDEvents : Swift.RawRepresentable {}
