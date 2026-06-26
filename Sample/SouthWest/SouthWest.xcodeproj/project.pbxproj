@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		191DD9B62B232EF000D96481 /* LogUserEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191DD9B52B232EF000D96481 /* LogUserEventView.swift */; };
-		19400C802FD717DF00CD90F8 /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 19400C7F2FD717DF00CD90F8 /* FreshdeskSDK */; };
 		1944DCC92B0C7FC800584408 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1944DCC82B0C7FC800584408 /* AppDelegate.swift */; };
 		1944DCD12B0C89DF00584408 /* SWConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1944DCD02B0C89DF00584408 /* SWConstants.swift */; };
 		195708BD2BD92315003CD3BA /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195708BC2BD92315003CD3BA /* ToastView.swift */; };
@@ -61,8 +60,8 @@
 		56A5C3362AFC27AB00736CF5 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5C3352AFC27AB00736CF5 /* OrderItem.swift */; };
 		56A5C3382AFC29B500736CF5 /* OrderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5C3372AFC29B500736CF5 /* OrderItemView.swift */; };
 		56EAEFC32B7B9B3800B93D9A /* ConfigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EAEFC22B7B9B3800B93D9A /* ConfigureView.swift */; };
-		7C3F85E42EBB744500B40EE5 /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */; };
 		7C6E58392B3AF68B008C7EF5 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E58382B3AF68B008C7EF5 /* Configurations.swift */; };
+		979C18FB2FEE5EB000F487FD /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 979C18FA2FEE5EB000F487FD /* FreshdeskSDK */; };
 		97DE59522E756ED3000E5526 /* ShowUserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE59512E756ED3000E5526 /* ShowUserDetailsView.swift */; };
 		ADE3A1E02B6000B900C84D77 /* PropertiesViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE3A1DF2B6000B900C84D77 /* PropertiesViewData.swift */; };
 		E4FA97652C34100300B3B52F /* PreChatFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FA97642C34100300B3B52F /* PreChatFormView.swift */; };
@@ -136,8 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C3F85E42EBB744500B40EE5 /* FreshdeskSDK in Frameworks */,
-				19400C802FD717DF00CD90F8 /* FreshdeskSDK in Frameworks */,
+				979C18FB2FEE5EB000F487FD /* FreshdeskSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,8 +489,7 @@
 			);
 			name = SouthWest;
 			packageProductDependencies = (
-				7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */,
-				19400C7F2FD717DF00CD90F8 /* FreshdeskSDK */,
+				979C18FA2FEE5EB000F487FD /* FreshdeskSDK */,
 			);
 			productName = SouthWest;
 			productReference = 56A5C2AE2AF9063E00736CF5 /* SouthWest.app */;
@@ -523,7 +520,7 @@
 			);
 			mainGroup = 56A5C2A52AF9063E00736CF5;
 			packageReferences = (
-				19400C7E2FD717DF00CD90F8 /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */,
+				979C18F92FEE5EB000F487FD /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */,
 			);
 			productRefGroup = 56A5C2AF2AF9063E00736CF5 /* Products */;
 			projectDirPath = "";
@@ -814,18 +811,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		19400C7E2FD717DF00CD90F8 /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */ = {
+		979C18F92FEE5EB000F487FD /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../../freshdesk-ios-sdk";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		19400C7F2FD717DF00CD90F8 /* FreshdeskSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FreshdeskSDK;
-		};
-		7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */ = {
+		979C18FA2FEE5EB000F487FD /* FreshdeskSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FreshdeskSDK;
 		};

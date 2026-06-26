@@ -9,7 +9,6 @@ Freshdesk iOS SDK is compatible with iOS 17+ devices, and delivers the best expe
 ### Swift Package Manager
 Add https://github.com/freshworks/freshdesk-ios-sdk as a Swift Package Repository in Xcode and follow the instructions to add FreshdeskSDK as a Swift Package.
 
-
 ## Documentation
 ### Initialisation
 In Appdelegate -> didFinishLaunchingWithOptions (Invoke the Freshdesk initialisation)
@@ -310,6 +309,20 @@ Note: The above API (Freshdesk.authenticateAndUpdate) will also be responsible f
 ```swift
         Freshdesk.dismissFreshdeskSDKViews()
 ```
+
+### Freshdesk SDK supports AI agent integration through the freshdesk-ios-integration skill available in the Skills folder. Below are sample prompts demonstrating how an AI agent can integrate with Freshdesk and handle different usage scenarios. 
+
+Greenfield integration (SDK not set up yet) :
+    Integrate Freshdesk iOS SDK into this SwiftSample project using the freshdesk-ios-integration skill. Walk me through what you need from me and wire it up.
+
+Existing integration / debugging :
+    Use the freshdesk-ios-integration skill to debug why the Freshdesk widget isn’t opening in this app and tell me what to fix.
+
+Diagnostics-first (Mode B) :
+    Follow the freshdesk-ios-integration skill: review my current Freshdesk setup and tell me how to run Freshdesk.runDiagnostics and interpret the report.
+
+Specific features :
+    Using freshdesk-ios-integration skill, add JWT authentication for Freshdesk 
     
 ## License
 FreshdeskSDK is released under the Commercial license. See [LICENSE](https://github.com/freshworks/freshdesk-ios-sdk/blob/main/FreshdeskSDK/LICENSE) for details.
