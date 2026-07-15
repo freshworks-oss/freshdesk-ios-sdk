@@ -18,6 +18,36 @@
             endingLineNumber = "41"
             landmarkName = "didTapShowFAQs(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8428061E-252D-41FA-ABD4-819CDDAF436B - c685f7b4773563f3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SouthWest.ViewController.didTapShowFAQs(__C.UIButton) -&gt; ()"
+                  moduleName = "SouthWest.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harkumar/Documents/Hotline/Freshdesk_iOS_SDK_Dev/freshdesk_ios_sdk_dev/Sample/SouthWest/SouthWest/Modules/TabBar/Tabs/SideMenu/LWSDK/UIKitComponents/ViewControllers/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42">
+               </Location>
+               <Location
+                  uuid = "8428061E-252D-41FA-ABD4-819CDDAF436B - 1a6100a2376d98c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (FreshdeskSDK.FDDiagnosticReport) -&gt; () in SouthWest.ViewController.didTapShowFAQs(__C.UIButton) -&gt; ()"
+                  moduleName = "SouthWest.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harkumar/Documents/Hotline/Freshdesk_iOS_SDK_Dev/freshdesk_ios_sdk_dev/Sample/SouthWest/SouthWest/Modules/TabBar/Tabs/SideMenu/LWSDK/UIKitComponents/ViewControllers/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

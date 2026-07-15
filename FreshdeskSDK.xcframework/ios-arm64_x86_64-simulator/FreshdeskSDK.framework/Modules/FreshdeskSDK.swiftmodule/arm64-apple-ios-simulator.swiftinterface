@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.3.2 effective-5.10 (swiftlang-6.3.2.1.108 clang-2100.1.1.101)
+// swift-compiler-version: Apple Swift version 6.3.3 effective-5.10 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
 // swift-module-flags: -target arm64-apple-ios17.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name FreshdeskSDK
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.2
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
 import Foundation
 import Swift
 import SwiftUI
@@ -72,6 +72,18 @@ public enum FDEvents : Swift.String, Swift.CaseIterable {
   nonisolated public static var allCases: [FreshdeskSDK.FDEvents] {
     get
   }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SDKHostPlatform : Swift.String, Swift.Codable {
+  case phonegap
+  case flutter
+  case xamarin
+  case reactNative
+  case iOS
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -163,7 +175,7 @@ public struct FreshdeskSDKConfig : Swift.Codable {
   public var sdkId: Swift.String
   public var jwtAuthToken: Swift.String?
   public var config: FreshdeskSDK.Configuration
-  public init(token: Swift.String, host: Swift.String, sdkId: Swift.String, jwtToken: Swift.String? = nil, locale: Swift.String? = nil, config: FreshdeskSDK.Configuration = Configuration(), shouldEnableLogs: Swift.Bool = false)
+  public init(token: Swift.String, host: Swift.String, sdkId: Swift.String, jwtToken: Swift.String? = nil, locale: Swift.String? = nil, config: FreshdeskSDK.Configuration = Configuration(), shouldEnableLogs: Swift.Bool = false, hostPlatform: FreshdeskSDK.SDKHostPlatform = .iOS)
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -219,3 +231,6 @@ extension FreshdeskSDK.FDDiagnosticStatus : Swift.RawRepresentable {}
 extension FreshdeskSDK.FDEvents : Swift.Equatable {}
 extension FreshdeskSDK.FDEvents : Swift.Hashable {}
 extension FreshdeskSDK.FDEvents : Swift.RawRepresentable {}
+extension FreshdeskSDK.SDKHostPlatform : Swift.Equatable {}
+extension FreshdeskSDK.SDKHostPlatform : Swift.Hashable {}
+extension FreshdeskSDK.SDKHostPlatform : Swift.RawRepresentable {}

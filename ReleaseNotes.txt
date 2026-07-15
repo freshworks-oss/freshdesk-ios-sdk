@@ -2,7 +2,13 @@ Freshdesk iOS SDK - Powered by Freshworks
 
 Documentation   : https://support.freshdesk.com
 Support Email   : support@freshdesk.com
-Version         : 1.3.0
+Version         : 1.3.1
+
+Ver 1.3.1
+__________________________
+Enhancements:
+    - Introduced an optional hostPlatform configuration that enables identification of the platform from which the customer is accessing the SDK.
+
 
 Ver 1.3.0
 __________________________
