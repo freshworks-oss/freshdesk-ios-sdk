@@ -60,11 +60,15 @@
 		56A5C3362AFC27AB00736CF5 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5C3352AFC27AB00736CF5 /* OrderItem.swift */; };
 		56A5C3382AFC29B500736CF5 /* OrderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5C3372AFC29B500736CF5 /* OrderItemView.swift */; };
 		56EAEFC32B7B9B3800B93D9A /* ConfigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EAEFC22B7B9B3800B93D9A /* ConfigureView.swift */; };
+		7C3F85E42EBB744500B40EE5 /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */; };
 		7C6E58392B3AF68B008C7EF5 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E58382B3AF68B008C7EF5 /* Configurations.swift */; };
-		979C18FB2FEE5EB000F487FD /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 979C18FA2FEE5EB000F487FD /* FreshdeskSDK */; };
 		97DE59522E756ED3000E5526 /* ShowUserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE59512E756ED3000E5526 /* ShowUserDetailsView.swift */; };
 		ADE3A1E02B6000B900C84D77 /* PropertiesViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE3A1DF2B6000B900C84D77 /* PropertiesViewData.swift */; };
 		E4FA97652C34100300B3B52F /* PreChatFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FA97642C34100300B3B52F /* PreChatFormView.swift */; };
+		F9C1922F30067817007E5DEF /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F9C1922E30067817007E5DEF /* FreshdeskSDK */; };
+		F9C192323006789D007E5DEF /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F9C192313006789D007E5DEF /* FreshdeskSDK */; };
+		F9C1923530077A8A007E5DEF /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F9C1923430077A8A007E5DEF /* FreshdeskSDK */; };
+		F9C1923830077AB3007E5DEF /* FreshdeskSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F9C1923730077AB3007E5DEF /* FreshdeskSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,7 +139,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				979C18FB2FEE5EB000F487FD /* FreshdeskSDK in Frameworks */,
+				7C3F85E42EBB744500B40EE5 /* FreshdeskSDK in Frameworks */,
+				F9C1923530077A8A007E5DEF /* FreshdeskSDK in Frameworks */,
+				F9C192323006789D007E5DEF /* FreshdeskSDK in Frameworks */,
+				F9C1922F30067817007E5DEF /* FreshdeskSDK in Frameworks */,
+				F9C1923830077AB3007E5DEF /* FreshdeskSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,7 +497,11 @@
 			);
 			name = SouthWest;
 			packageProductDependencies = (
-				979C18FA2FEE5EB000F487FD /* FreshdeskSDK */,
+				7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */,
+				F9C1922E30067817007E5DEF /* FreshdeskSDK */,
+				F9C192313006789D007E5DEF /* FreshdeskSDK */,
+				F9C1923430077A8A007E5DEF /* FreshdeskSDK */,
+				F9C1923730077AB3007E5DEF /* FreshdeskSDK */,
 			);
 			productName = SouthWest;
 			productReference = 56A5C2AE2AF9063E00736CF5 /* SouthWest.app */;
@@ -520,7 +532,7 @@
 			);
 			mainGroup = 56A5C2A52AF9063E00736CF5;
 			packageReferences = (
-				979C18F92FEE5EB000F487FD /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */,
+				F9C1923630077AB3007E5DEF /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */,
 			);
 			productRefGroup = 56A5C2AF2AF9063E00736CF5 /* Products */;
 			projectDirPath = "";
@@ -811,14 +823,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		979C18F92FEE5EB000F487FD /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */ = {
+		F9C1923630077AB3007E5DEF /* XCLocalSwiftPackageReference "../../../freshdesk-ios-sdk" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../../freshdesk-ios-sdk";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		979C18FA2FEE5EB000F487FD /* FreshdeskSDK */ = {
+		7C3F85E32EBB744500B40EE5 /* FreshdeskSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FreshdeskSDK;
+		};
+		F9C1922E30067817007E5DEF /* FreshdeskSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FreshdeskSDK;
+		};
+		F9C192313006789D007E5DEF /* FreshdeskSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FreshdeskSDK;
+		};
+		F9C1923430077A8A007E5DEF /* FreshdeskSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FreshdeskSDK;
+		};
+		F9C1923730077AB3007E5DEF /* FreshdeskSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FreshdeskSDK;
 		};
