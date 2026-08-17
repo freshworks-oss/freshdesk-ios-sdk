@@ -40,7 +40,7 @@ Before acting, decide which mode applies (see Step 0) and collect:
 | Host URL | Admin Settings → Mobile Chat SDK → select SDK → App Keys |
 | SDK ID | Admin Settings → Mobile Chat SDK → select SDK → App Keys |
 | JWT (if widget enforces it) | Generated server-side using the encryption key under the SDK widget |
-| iOS deployment target | Host app's Xcode project / Package.swift (must be ≥ iOS 17) |
+| iOS deployment target | Host app's Xcode project / Package.swift (must be ≥ iOS 15) |
 
 ### Mode A only — Greenfield integration
 
@@ -96,7 +96,7 @@ Use this mode when the SDK is not yet in the app. `Freshdesk.runDiagnostics` can
 
 Before writing any code, gather the inputs from the **Mode A only** table in the Inputs section. Ask one question at a time and wait for an answer; do not assume defaults for things the user has not stated. Confirm:
 
-- Host app deployment target is iOS 17 or newer (raise it if lower; SwiftPM blocks iOS 16).
+- Host app deployment target is iOS 15 or newer (raise it if lower; SwiftPM blocks iOS 14).
 - The user has access to Admin Settings → Mobile Chat SDK to retrieve token / host / sdkId.
 - For push, the user can add the Push Notifications capability and (for production) upload a `.p8` Auth Key in the Freshdesk admin portal.
 
@@ -469,7 +469,7 @@ When responding to the user, always include:
    - JWT (if enforced): `FreshdeskJWTDelegate` conformance.
    - Content configuration (if requested): where the `ContentConfiguration` is built and passed via `config:` / `Freshdesk.setContentConfiguration(_:)`.
 4. **Capabilities and permissions checklist** the developer must add manually in Xcode and the Freshdesk admin portal:
-   - iOS deployment target ≥ 17.
+   - iOS deployment target ≥ 15.
    - Push Notifications capability (only if push is wired).
    - `.p8` Auth Key + Auth Key ID + Team ID uploaded to Freshdesk admin portal (only if push is wired).
 5. **Most relevant official link**:

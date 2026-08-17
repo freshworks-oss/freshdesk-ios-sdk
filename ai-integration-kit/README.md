@@ -12,7 +12,7 @@ automatically with no extra configuration.
 
 Before integrating, confirm:
 
-- Host app **iOS deployment target is 17 or newer** (FreshdeskSDK requires iOS 17).
+- Host app **iOS deployment target is 15 or newer** (FreshdeskSDK requires iOS 15).
 - Access to **Admin Settings → Mobile Chat SDK** in your Freshdesk portal
   (account token, host URL, SDK ID).
 - Optional: push notification setup (`.p8` Auth Key in the portal) and/or

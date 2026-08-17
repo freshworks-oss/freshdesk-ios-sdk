@@ -19,7 +19,7 @@ User: "I want to add Freshdesk support to my SwiftUI iOS app. There's a 'Help' b
 7. Capabilities checklist for the user:
    - Add **Push Notifications** capability in Xcode.
    - Upload `.p8` Auth Key + Team ID to Freshdesk admin → Mobile Chat SDK → Push Notification.
-   - Confirm host app deployment target is iOS 17+.
+   - Confirm host app deployment target is iOS 15+.
 8. Hand off to Mode B: "Build, run, tap Help once, then run `Freshdesk.runDiagnostics { print($0.prettyPrinted()) }` and share the report."
 
 ## Example 1: Widget does not open
@@ -98,10 +98,10 @@ Freshdesk.authenticateAndUpdate(jwt: "<valid-JWT>")
 
 ## Example 4: SPM cannot add the SDK
 
-User: "Xcode says the package requires iOS 17 but my app is iOS 16."
+User: "Xcode says the package requires iOS 15 but my app is iOS 14."
 
 1. No diagnostics needed — this is a build-time / SPM-resolution issue.
-2. Action: raise the host app's deployment target to iOS 17 in Xcode (Project → Target → Minimum Deployments → iOS 17.0). FreshdeskSDK declares `.iOS(.v17)` in `Package.swift` and SPM blocks lower targets at resolution.
+2. Action: raise the host app's deployment target to iOS 15 in Xcode (Project → Target → Minimum Deployments → iOS 15.0). FreshdeskSDK declares `.iOS(.v15)` in `Package.swift` and SPM blocks lower targets at resolution.
 3. After raising the target, re-add the SDK and run `Freshdesk.runDiagnostics` to confirm a clean baseline.
 
 ## Example 5: Customise / localise the widget's static text
