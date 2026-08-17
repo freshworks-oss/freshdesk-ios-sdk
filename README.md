@@ -4,7 +4,7 @@ Freshdesk iOS SDK
 "Modern ticket software that your sales and customer engagement teams will love [FreshdeskSDK](https://www.freshworks.com)."
 
 ## Installation
-Freshdesk iOS SDK is compatible with iOS 17+ devices, and delivers the best experience on iOS 18.5 and newer versions.
+Freshdesk iOS SDK is compatible with iOS 15+ devices.
 
 ### Swift Package Manager
 Add https://github.com/freshworks/freshdesk-ios-sdk as a Swift Package Repository in Xcode and follow the instructions to add FreshdeskSDK as a Swift Package.

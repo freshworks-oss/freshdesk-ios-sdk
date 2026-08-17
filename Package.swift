@@ -3,7 +3,7 @@ import PackageDescription
 let package = Package(
     name: "FreshdeskSDK",
     platforms: [
-        .iOS(.v17)
+        .iOS(.v15)
     ],
     products: [
         .library(
