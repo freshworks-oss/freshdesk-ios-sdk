@@ -10657,7 +10657,7 @@
       "kind": "StringLiteral",
       "offset": 1147,
       "length": 7,
-      "value": "\"1.4.0\""
+      "value": "\"1.4.1\""
     },
     {
       "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/Common\/FDConstants.swift",
@@ -11439,7 +11439,7 @@
     {
       "filePath": "\/Users\/harkumar\/Documents\/Hotline\/Freshdesk_iOS_SDK_Dev\/freshdesk_ios_sdk_dev\/Sources\/FreshdeskSDK\/LWSDK\/Core\/FreshdeskManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2002,
+      "offset": 2042,
       "length": 1,
       "value": "0"
     },

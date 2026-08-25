@@ -10,11 +10,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		t/Prb5j+CFBmMEaC57fleNOHjVk=
+		0M9D2o+DNWd5lLvwWljPZCX1t5s=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		+x+bPLLJzW3LL3DzW8YRDVNmLEY=
+		GxkohPaUy04IpHu7fi9OUHObcbE=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		IeKyc5J36PEbpnMJJcJybWbsgf4=
+		R1TNVeD/8xKciNmYG8SsLE+c+kM=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		+x+bPLLJzW3LL3DzW8YRDVNmLEY=
+		GxkohPaUy04IpHu7fi9OUHObcbE=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		1+lvy8pMjWuH/HoDhgbryGg04vg=
+		hLQlX5uvZxx9D/hVYUyxk1VAKak=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -82,7 +82,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9vPKNncdlO5K94hJpZWp18jNnrWdd9iyn2e5a3Np6lo=
+			yvOzMBzUMfFxPybjK+8nezXaPok7Y6iv6VQFKmoBU3A=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -110,14 +110,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			iY+IricLZsC8e2KShzHKRfIT2CZ/XrzcnxFb8BWHTNY=
+			IzcDjDmlVWvSgC6iQMS769jlGSQnVscTwdnPlV0uoBo=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9vPKNncdlO5K94hJpZWp18jNnrWdd9iyn2e5a3Np6lo=
+			yvOzMBzUMfFxPybjK+8nezXaPok7Y6iv6VQFKmoBU3A=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -145,7 +145,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			So8sfQOzzECMq7XARMJh5kVjMkm4OhkjF5SDpS1BBLY=
+			SNUxPHhcslCK23T2c7GPAPedyCi25a2PYrLMcTINrgM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

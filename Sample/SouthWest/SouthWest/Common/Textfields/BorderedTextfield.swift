@@ -15,28 +15,28 @@ struct BorderedTextfield: View {
     @Binding var value: String
     
     var body: some View {
-            ZStack(alignment: .leading) {
-                       TextField(Constants.Characters.emptyString, text: $value)
-                    .accessibilityIdentifier(placeholder)
-                    .foregroundColor(textColor)
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(borderColor, lineWidth: 1)
-                    )
-                    .background(Color.clear)
-                    if value.isEmpty {
-                        Text(placeholder)
-                            .foregroundColor(.gray)
-                            .padding(.horizontal, 5)
+                ZStack(alignment: .leading) {
+                           TextField(Constants.Characters.emptyString, text: $value)
+                        .accessibilityIdentifier(placeholder)
+                        .foregroundColor(textColor)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(borderColor, lineWidth: 1)
+                        )
+                        .background(Color.clear)
+                        if value.isEmpty {
+                            Text(placeholder)
+                                .foregroundColor(.gray)
+                                .padding(.horizontal, 5)
+                        }
                     }
                 }
             }
-        }
 
 
-    struct BorderedTextfield_Previews: PreviewProvider {
-        static var previews: some View {
-            BorderedTextfield(placeholder: Constants.PreviewProvider.sampleText, value: .constant(Constants.PreviewProvider.emptyText))
+        struct BorderedTextfield_Previews: PreviewProvider {
+            static var previews: some View {
+                BorderedTextfield(placeholder: Constants.PreviewProvider.sampleText, value: .constant(Constants.PreviewProvider.emptyText))
+            }
         }
-    }
