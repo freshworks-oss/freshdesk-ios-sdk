@@ -1,3 +1,4 @@
 framework module FreshdeskSDK {
   header "FreshdeskSDK-Swift.h"
+  requires objc
 }
