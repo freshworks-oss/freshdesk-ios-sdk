@@ -1,14 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.3.3 effective-5.10 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
-// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name FreshdeskSDK
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
+// swift-compiler-version: Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name FreshdeskSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.4
 import Foundation
 import Swift
 import SwiftUI
 import SystemConfiguration
 import UIKit
 import UserNotifications
-@preconcurrency import WebKit
+import WebKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
@@ -22,7 +22,9 @@ public enum UserState : Swift.String {
   case identifierUpdated
   case authenticated
   case undefined
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -33,7 +35,9 @@ public enum FDDiagnosticStatus : Swift.String {
   case warn
   case fail
   case skipped
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -45,7 +49,9 @@ public struct FDDiagnosticCheck {
   public let status: FreshdeskSDK.FDDiagnosticStatus
   public let details: Swift.String
   public let fixHint: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(id: Swift.String, title: Swift.String, status: FreshdeskSDK.FDDiagnosticStatus, details: Swift.String, fixHint: Swift.String? = nil)
+  #endif
 }
 public struct FDDiagnosticReport {
   public let sdkVersion: Swift.String
@@ -66,7 +72,9 @@ public let Freshdesk: FreshdeskSDK.Freshworks
 public let FD_EMPTY_STR: Swift.String
 public enum FDEvents : Swift.String, Swift.CaseIterable {
   case userCreated, unreadCount, messageSent, messageReceived, downloadFile, userCleared
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias AllCases = [FreshdeskSDK.FDEvents]
   public typealias RawValue = Swift.String
   nonisolated public static var allCases: [FreshdeskSDK.FDEvents] {
@@ -82,7 +90,9 @@ public enum SDKHostPlatform : Swift.String, Swift.Codable {
   case xamarin
   case reactNative
   case iOS
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -94,7 +104,9 @@ public struct ContentConfiguration : Swift.Codable {
   public var privacyPolicySetting: FreshdeskSDK.PrivacyPolicyContent?
   public var actions: FreshdeskSDK.ActionContent?
   public var additionalFields: [Swift.String : FreshdeskSDK.AnyCodable]
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(headers: FreshdeskSDK.HeaderContent? = nil, placeholders: FreshdeskSDK.PlaceholderContent? = nil, privacyPolicySetting: FreshdeskSDK.PrivacyPolicyContent? = nil, actions: FreshdeskSDK.ActionContent? = nil, additionalFields: [Swift.String : FreshdeskSDK.AnyCodable] = [:])
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -110,14 +122,18 @@ public struct HeaderContent : Swift.Codable {
   public var channelResponse: FreshdeskSDK.ChannelResponseContent?
   public var ticketForm: FreshdeskSDK.TicketFormContent?
   public var typicallyRepliesFewMinsFallback: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(chat: Swift.String? = nil, faq: Swift.String? = nil, faqMessageUs: Swift.String? = nil, faqNotAvailable: Swift.String? = nil, faqSearchNotAvailable: Swift.String? = nil, faqThankyou: Swift.String? = nil, faqUseful: Swift.String? = nil, faqNotUseful: Swift.String? = nil, channelResponse: FreshdeskSDK.ChannelResponseContent? = nil, ticketForm: FreshdeskSDK.TicketFormContent? = nil, typicallyRepliesFewMinsFallback: Swift.String? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct ChannelResponseContent : Swift.Codable {
   public var offline: Swift.String?
   public var online: FreshdeskSDK.ChannelResponseOnlineContent?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(offline: Swift.String? = nil, online: FreshdeskSDK.ChannelResponseOnlineContent? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -125,14 +141,18 @@ public struct ChannelResponseOnlineContent : Swift.Codable {
   public var defaultMessage: Swift.String?
   public var minutes: FreshdeskSDK.ChannelResponseTimeUnitContent?
   public var hours: FreshdeskSDK.ChannelResponseTimeUnitContent?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(defaultMessage: Swift.String? = nil, minutes: FreshdeskSDK.ChannelResponseTimeUnitContent? = nil, hours: FreshdeskSDK.ChannelResponseTimeUnitContent? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct ChannelResponseTimeUnitContent : Swift.Codable {
   public var one: Swift.String?
   public var more: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(one: Swift.String? = nil, more: Swift.String? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -141,20 +161,26 @@ public struct TicketFormContent : Swift.Codable {
   public var listTitle: Swift.String?
   public var submitBtnTitle: Swift.String?
   public var confirmationMessage: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(title: Swift.String? = nil, listTitle: Swift.String? = nil, submitBtnTitle: Swift.String? = nil, confirmationMessage: Swift.String? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct PlaceholderContent : Swift.Codable {
   public var replyField: Swift.String?
   public var searchField: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(replyField: Swift.String? = nil, searchField: Swift.String? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct ActionContent : Swift.Codable {
   public var tabChat: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(tabChat: Swift.String? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -162,7 +188,9 @@ public struct PrivacyPolicyContent : Swift.Codable {
   public var privacyPolicyMessage: Swift.String?
   public var privacyPolicyLinkText: Swift.String?
   public var privacyPolicyLink: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(privacyPolicyMessage: Swift.String? = nil, privacyPolicyLinkText: Swift.String? = nil, privacyPolicyLink: Swift.String? = nil)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -175,7 +203,9 @@ public struct FreshdeskSDKConfig : Swift.Codable {
   public var sdkId: Swift.String
   public var jwtAuthToken: Swift.String?
   public var config: FreshdeskSDK.Configuration
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(token: Swift.String, host: Swift.String, sdkId: Swift.String, jwtToken: Swift.String? = nil, locale: Swift.String? = nil, config: FreshdeskSDK.Configuration = Configuration(), shouldEnableLogs: Swift.Bool = false, hostPlatform: FreshdeskSDK.SDKHostPlatform = .iOS)
+  #endif
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -197,7 +227,9 @@ extension FreshdeskSDK.Freshworks {
   nonisolated final public func initialize(with model: FreshdeskSDK.FreshdeskSDKConfig)
   nonisolated final public func enableDebugLogs(_ isEnabled: Swift.Bool)
   nonisolated final public func openSupport(_ viewController: UIKit.UIViewController)
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated final public func openTopic(_ viewController: UIKit.UIViewController, topicId: Swift.Int?, topicName: Swift.String? = nil)
+  #endif
   nonisolated final public func openKnowledgeBase(_ viewController: UIKit.UIViewController)
   nonisolated final public func getUnreadCount() -> Swift.Int
   nonisolated final public func getSDKVersion() -> Swift.String
@@ -214,12 +246,20 @@ extension FreshdeskSDK.Freshworks {
   nonisolated final public func setTicketProperties(with property: [Swift.String : Any])
   nonisolated final public func setUserDetails(with userDetails: [Swift.String : Any])
   nonisolated final public func setContentConfiguration(_ content: FreshdeskSDK.ContentConfiguration)
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated final public func getUser(onFailure: ((any Swift.Error) -> Swift.Void)? = nil, onSuccess: @escaping ([Swift.String : Any]) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated final public func resetUser(onSuccess: (() -> Swift.Void)? = nil, onFailure: (() -> Swift.Void)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated final public func trackUserEvents(name: Swift.String, payload: [Swift.String : Swift.String]? = nil)
+  #endif
 }
 extension FreshdeskSDK.Freshworks {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated final public func setJWTDelegate(_ delegate: (any FreshdeskSDK.FreshdeskJWTDelegate)?)
+  #endif
   nonisolated final public func authenticateAndUpdate(jwt: Swift.String)
 }
 extension FreshdeskSDK.UserState : Swift.Equatable {}
