@@ -47,10 +47,11 @@ Ask one question at a time; do not assume defaults. Some of these only matter on
 | Account token, host URL, SDK ID | Required by `FreshdeskSDKConfig` at init | Freshdesk Admin Settings → Mobile Chat SDK → select SDK → App Keys |
 | Does the widget enforce JWT? (yes / no / unknown) | `setUserDetails`/`setTicketProperties` silently no-op under enforcement — decides whether identity/property code must move into a JWT payload instead | Freshdesk Admin Settings → Mobile Chat SDK → JWT settings |
 | Is the app still on an APNs `.p12` push certificate? | Freshdesk supports **`.p8` only** — a `.p12`-only app is push-blocked until a `.p8` key is generated | Apple Developer portal |
+| Any use of `sendMessage` / `FreshchatMessage(message:andTag:)`? | Freshchat's is **tag-based**; Freshdesk's `messageToTopic` is **topic-based**. Each tag must be mapped to a Freshdesk topic name or id by the user, and `isDraft: false` is needed to actually send (see api-mapping.md §Messaging and bots) | Grep results from Step 0 |
 | Current CocoaPods or SPM setup | Decides the exact Step 2 procedure | `Podfile` / `Package.swift` / Xcode package list |
 | Current deployment target | Freshdesk requires **iOS 15+** (Freshchat supported iOS 12+) — must be raised if lower | Xcode project settings |
 | Any custom Freshchat theming (`themeName` `.plist`) or `stringsBundle`? | Neither carries over; appearance becomes Freshdesk-portal-driven remote config — this is often the single largest migration cost | Search the codebase for `config.themeName` / `config.stringsBundle` |
-| Any usage of parallel conversations, tag filtering, embedded FAQ/conversations screens, `sendMessage`, or `setBotVariables`? | These have **no Freshdesk equivalent** (see api-mapping.md Appendix A) — flag early so product/design can sign off on the loss before code review, not after | Grep results from Step 0 |
+| Any usage of parallel conversations, tag filtering, embedded FAQ/conversations screens, or `setBotVariables`? | These have **no Freshdesk equivalent** (see api-mapping.md Appendix A) — flag early so product/design can sign off on the loss before code review, not after | Grep results from Step 0 |
 
 If any answer is "unknown", proceed and let Step 0's codebase scan and Step 7's build/diagnostics fill the gap later.
 
@@ -166,7 +167,7 @@ There is no readiness callback (`initializedCallback` equivalent) on iOS. Do not
 For each file flagged in Step 0, and for each Freshchat symbol in it:
 
 1. Look up the symbol in [api-mapping.md](api-mapping.md)'s mapping table.
-2. **Direct or Changed** → rewrite the call site using the Freshdesk signature shown. Pay attention to: argument order changes (e.g. `openTopic`'s `topicId` comes before `topicName` and is `Int?`, not `String`), sync→async shape changes (`getUser` is now callback-based), and value-type narrowing (`trackUserEvents` payload values must be `String`, not `Any`).
+2. **Direct or Changed** → rewrite the call site using the Freshdesk signature shown. Pay attention to: argument order changes (e.g. `openTopic`'s `topicId` comes before `topicName` and is `Int?`, not `String`; `sendMessage`'s tag becomes a topic and the call needs `isDraft: false` to send), sync→async shape changes (`getUser` is now callback-based), and value-type narrowing (`trackUserEvents` payload values must be `String`, not `Any`).
 3. **Gap (NA)** → do not delete the call. Comment it out using the template below, citing the specific capability from api-mapping.md and any workaround it documents.
 4. Once every call in a file is handled, swap that file's `import FreshchatSDK` → `import FreshdeskSDK`.
 
@@ -183,8 +184,7 @@ When no Freshdesk equivalent exists, leave the original code in place, commented
 // Suggested workaround: <the workaround from api-mapping.md, or "none" if api-mapping.md states none>
 // Decision needed: keep this flow client-side without SDK support, redesign it, or drop it.
 // Original Freshchat code (will not compile once FreshchatSDK is removed):
-// let m1 = FreshchatMessage(message: "Need help with my order", andTag: "orders")
-// Freshchat.sharedInstance().sendMessage(m1)
+// Freshchat.sharedInstance().setBotVariables(["userTier": "gold"], withBotSpecificVariables: [:])
 ```
 
 Use the exact marker string `FRESHCHAT-MIGRATION-GAP` on every occurrence — it is what the developer (or CI) greps for afterward:
@@ -202,6 +202,8 @@ These cannot be migrated in code at all — they require action in the Freshdesk
 - **Theming** (`config.themeName` + custom `.plist`): there is no theming/appearance API in Freshdesk. Appearance is remote-configured from the linked Web Chat Widget in the portal. Flag this to the user as likely the single largest non-code migration cost; do not attempt to reproduce it in Swift.
 - **Localization** (`config.stringsBundle`): replaced by `ContentConfiguration` (code-first, per-string overrides — see api-mapping.md) plus the init-only `locale` parameter. There is no runtime language switch; changing language requires re-`initialize`.
 - **Feature toggles** (camera/gallery/file attachment, team-member info, response-expectation visibility, notification banner, event upload): all become portal widget configuration. List every one the app set to a non-default value (Step 4) so the user can hand that list to their Freshdesk admin.
+
+- **New capabilities to mention (not migrate)**: `openArticle(_:articleId:)` and the ticket-form APIs (`openTicketForm`, `prefillTicketForm`, `disableTicketFormFields`, `hideTicketFormFields`, `hideTicketFormFieldChoices`, `clearTicketForm`) have no Freshchat counterpart. Note them in the hand-off as optional follow-ups; see api-mapping.md §Ticket forms.
 
 Do not write speculative Swift code for any of these — there is nothing to write. Surface them as a checklist item instead.
 
@@ -236,7 +238,7 @@ Never invent a token, host, sdkId, JWT, or push key, and never invent a workarou
 
 ## Examples
 
-For worked migration scenarios (CocoaPods app, SPM app, JWT-enforced app, an app that used `sendMessage`/`setBotVariables`), see [examples.md](examples.md).
+For worked migration scenarios (CocoaPods app, SPM app, JWT-enforced app, an app that used `sendMessage` (tag → topic) and `setBotVariables`), see [examples.md](examples.md).
 
 ## Reference
 

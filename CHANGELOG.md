@@ -15,6 +15,12 @@ HOW TO USE (for developers):
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-11-25
+#### Enhancements
+- Added Ticket Form APIs to open a specific form, pre-populate field, disable or hide specific fields, hide field choices, and clear the ticket form.
+- Added the messageToTopic API to open a topic by ID or name and either send a message directly or keep it as a draft in the reply editor, based on the isDraft flag.
+- Exposed an API to open a specific knowledge base article.
+
 ## [1.4.2] - 2026-10-22
 #### Bug Fixes
 - Fixed a crash that occurred when SDK APIs were called before SDK initialization.

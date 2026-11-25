@@ -32,6 +32,9 @@ struct Constants {
         static let eventSent = "Event sent: "
         static let userResetSuccess = "User reset was successful"
         static let invalidJson = "Invalid JSON. Please enter the correct JSON."
+        static let invalidArticleId = "Please enter a valid article ID."
+        static let invalidFormId = "Please enter a valid form ID."
+        static let invalidStringArrayJson = "Please enter a valid JSON array of strings for field names."
     }
     
     struct Login {
@@ -262,6 +265,203 @@ struct Constants {
             static let referenceIdPlaceholder = "Enter Topic ID here."
         }
         
+        struct SendMessageToTopic {
+            static let title = "Send Message"
+            static let subheading = "Open a topic and draft or send a message in it."
+            static let mainButton = "Send"
+            static let cancelButton = "Cancel"
+
+            static let topicIdTitle = "Topic ID"
+            static let topicIdPlaceholder = "Enter Topic ID here."
+            static let messageTitle = "Message"
+            static let messagePlaceholder = "Enter message to send."
+            static let draftToggleTitle = "Save as draft (don't send)"
+
+            static let topicNameTitle = "Topic Name"
+            static let topicNamePlaceholder = "Enter Topic name here."
+            static let topicHint = "Enter either Topic ID or Topic name. If both are filled, Topic ID is used (messageToTopic by id); otherwise Topic name is used (messageToTopic by name)."
+
+            static let missingMessageError = "Message is required"
+            static let missingTopicError = "Enter either a Topic ID or a Topic name"
+            static let invalidTopicIdError = "Topic ID must be a number"
+        }
+        
+        struct OpenArticle {
+            static let title = "Open Article"
+            static let subheading = ""
+            static let mainButton = "Open"
+            
+            static let articleIdTitle = "ArticleId"
+            static let articleIdPlaceholder = "Enter Article ID Here"
+        }
+        
+        struct TicketFormIdSheet {
+            static let mainButton = "Open"
+        }
+        
+        struct TicketForm {
+            static let screenTitle = "Ticket Form"
+            static let openTicketFormButton = "Open Ticket Form"
+            static let clearTicketFormButton = "Clear Ticket Form"
+            static let prefillTicketFormButton = "Prefill Ticket Form"
+            static let disableTicketFormFieldsButton = "Disable Ticket Form Fields"
+            static let hideTicketFormFieldsButton = "Hide Ticket Form Fields"
+            static let hideTicketFormFieldChoicesButton = "Hide Ticket Field Choices"
+        }
+        
+        struct OpenTicketForm {
+            static let title = "Open Ticket Form"
+            static let subheading = ""
+            static let formIdTitle = "FormId"
+            static let formIdPlaceholder = "Enter Form ID Here"
+        }
+        
+        struct ClearTicketForm {
+            static let title = "Clear Ticket Form"
+            static let subheading = ""
+            static let formIdTitle = "FormId"
+            static let formIdPlaceholder = "Enter Form ID Here"
+            static let mainButton = "Clear"
+        }
+        
+        struct PrefillTicketForm {
+            static let title = "Prefill Ticket Form"
+            static let subheading = ""
+            static let formIdTitle = "FormId"
+            static let formIdPlaceholder = "Enter Form ID Here"
+            static let fieldsPayloadTitle = "Fields payload"
+            static let fieldsPayloadPlaceholder = "Enter JSON object for prefill fields"
+            static let fieldsPayloadDescription = """
+                Enter a JSON object for ticket form fields ([String: Any]). Example:
+                {
+                  "subject": "Damaged order",
+                  "description": "I received a damaged product",
+                  "group": 123,
+                  "priority": 1,
+                  "product": 10000000008434,
+                  "status": 2,
+                  "ticket_type": "Incident",
+                  "customFields": {
+                    "cf_reference_number": 223,
+                    "cf_decimal": 0.2,
+                    "cf_date": "2024-02-15",
+                    "cf_checkbox": true,
+                    "cf_parent": "category 1",
+                    "cf_child": "subcategory 1",
+                    "cf_sub_child": "item 1",
+                    "cf_dp": "First Choice"
+                  }
+                }
+                """
+            static let defaultFieldsJson = """
+                {
+                  "subject": "Damaged order",
+                  "description": "I received a damaged product",
+                  "group": 123,
+                  "priority": 1,
+                  "product": 10000000008434,
+                  "status": 2,
+                  "ticket_type": "Incident",
+                  "customFields": {
+                    "cf_reference_number": 223,
+                    "cf_decimal": 0.2,
+                    "cf_date": "2024-02-15",
+                    "cf_checkbox": true,
+                    "cf_parent": "category 1",
+                    "cf_child": "subcategory 1",
+                    "cf_sub_child": "item 1",
+                    "cf_dp": "First Choice"
+                  }
+                }
+                """
+        }
+        
+        struct DisableTicketFormFields {
+            static let title = "Disable Ticket Form Fields"
+            static let subheading = ""
+            static let mainButton = "Disable"
+            static let formIdTitle = "FormId"
+            static let formIdPlaceholder = "Enter Form ID Here"
+            static let fieldsPayloadTitle = "Fields list"
+            static let fieldsPayloadPlaceholder = "Enter JSON array of field keys to disable"
+            static let fieldsPayloadDescription = """
+                Enter a JSON array of field names ([String]). Example:
+                ["subject", "description", "group", "priority", "product", "ticket_type", "custom_fields.cf_reference_number", "custom_fields.cf_decimal", "custom_fields.cf_date", "custom_fields.cf_checkbox", "custom_fields.cf_dp"]
+                """
+            static let defaultFieldsJson = """
+                [
+                  "subject",
+                  "description",
+                  "group",
+                  "priority",
+                  "product",
+                  "ticket_type",
+                  "custom_fields.cf_reference_number",
+                  "custom_fields.cf_decimal",
+                  "custom_fields.cf_date",
+                  "custom_fields.cf_checkbox",
+                  "custom_fields.cf_dp"
+                ]
+                """
+        }
+        
+        struct HideTicketFormFields {
+            static let title = "Hide Ticket Fields"
+            static let subheading = ""
+            static let mainButton = "Hide"
+            static let formIdTitle = "FormId"
+            static let formIdPlaceholder = "Enter Form ID Here"
+            static let fieldsPayloadTitle = "Fields list"
+            static let fieldsPayloadPlaceholder = "Enter JSON array of field keys to hide"
+            static let fieldsPayloadDescription = """
+                Enter a JSON array of field names ([String]). Example:
+                ["subject", "description", "group", "priority", "product", "ticket_type", "custom_fields.cf_reference_number", "custom_fields.cf_decimal", "custom_fields.cf_date", "custom_fields.cf_checkbox", "custom_fields.cf_dp", "custom_fields.cf_parent"]
+                """
+            static let defaultFieldsJson = """
+                [
+                  "subject",
+                  "description",
+                  "group",
+                  "priority",
+                  "product",
+                  "ticket_type",
+                  "custom_fields.cf_reference_number",
+                  "custom_fields.cf_decimal",
+                  "custom_fields.cf_date",
+                  "custom_fields.cf_checkbox",
+                  "custom_fields.cf_dp",
+                  "custom_fields.cf_parent"
+                ]
+                """
+        }
+        
+        struct HideTicketFormFieldChoices {
+            static let title = "Hide Ticket Field Choices"
+            static let subheading = ""
+            static let mainButton = "Hide Choices Fields"
+            static let formIdTitle = "FormId"
+            static let formIdPlaceholder = "Enter Form ID Here"
+            static let choicesPayloadTitle = "Choices payload"
+            static let choicesPayloadPlaceholder = "Enter JSON object for choices to hide ([String: Any])"
+            static let choicesPayloadDescription = """
+                Enter a JSON object mapping fields to the choice values to hide. Example:
+                {
+                  "priority": [2, 3],
+                  "custom_fields": {
+                    "cf_dp": ["Second Choice"]
+                  }
+                }
+                """
+            static let defaultChoicesJson = """
+                {
+                  "priority": [2, 3],
+                  "custom_fields": {
+                    "cf_dp": ["Second Choice"]
+                  }
+                }
+                """
+        }
+        
         struct LoadAccount {
             static let title = "Load Account"
             static let subheading = "Enter your account credentials to initialise the SDK"
@@ -418,6 +618,19 @@ struct Constants {
         static let selectedUserLanguageLocaleCode = "fw_selectedUserLanguageLocaleCode"
         static let topicIdForConversation = "fw_topicIdForConversation"
         static let topicNameForConversation = "fw_topicNameForConversation"
+        static let topicIdForSendMessage = "fw_topicIdForSendMessage"
+        static let topicNameForSendMessage = "fw_topicNameForSendMessage"
+        static let articleIdForOpenArticle = "fw_articleIdForOpenArticle"
+        static let ticketFormOpenFormId = "fw_ticketFormOpenFormId"
+        static let ticketFormClearFormId = "fw_ticketFormClearFormId"
+        static let prefillTicketFormId = "fw_prefillTicketFormId"
+        static let prefillTicketFormPayloadJson = "fw_prefillTicketFormPayloadJson"
+        static let disableTicketFormFieldsFormId = "fw_disableTicketFormFieldsFormId"
+        static let disableTicketFormFieldsPayloadJson = "fw_disableTicketFormFieldsPayloadJson"
+        static let hideTicketFormFieldsFormId = "fw_hideTicketFormFieldsFormId"
+        static let hideTicketFormFieldsPayloadJson = "fw_hideTicketFormFieldsPayloadJson"
+        static let hideTicketFormFieldChoicesFormId = "fw_hideTicketFormFieldChoicesFormId"
+        static let hideTicketFormFieldChoicesPayloadJson = "fw_hideTicketFormFieldChoicesPayloadJson"
         static let externalID = "fw_externalID"
         static let restoreID = "fw_restoreID"
         static let userDetails = "fw_userDetails"

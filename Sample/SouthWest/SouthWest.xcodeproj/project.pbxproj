@@ -32,6 +32,14 @@
 		56A3A5702B21BF05000177FA /* UpdateUserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3A55C2B21BF05000177FA /* UpdateUserDetailsView.swift */; };
 		56A3A5712B21BF05000177FA /* IdentifyUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3A55D2B21BF05000177FA /* IdentifyUserView.swift */; };
 		56A3A5722B21BF05000177FA /* OpenSpecificConversationsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3A55E2B21BF05000177FA /* OpenSpecificConversationsInputView.swift */; };
+		5A11D0010000000000000001 /* SendMessageToTopicInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11D0010000000000000002 /* SendMessageToTopicInputView.swift */; };
+		A7F8E9D12B24A1B2001A0002 /* OpenArticleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F8E9D12B24A1B2001A0001 /* OpenArticleInputView.swift */; };
+		B8E7F9012B25C1D3003A006 /* TicketFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E7F9012B25C1D3003A005 /* TicketFormView.swift */; };
+		C1D2E3F42B26A1B2001A0A2 /* PrefillTicketFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D2E3F42B26A1B2001A0A1 /* PrefillTicketFormView.swift */; };
+		E3F4A5B62B28C3D4004E002 /* DisableTicketFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F4A5B62B28C3D4004E001 /* DisableTicketFormFieldsView.swift */; };
+		F4A5B6C72B29D4E5005F002 /* HideTicketFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A5B6C72B29D4E5005F001 /* HideTicketFormFieldsView.swift */; };
+		B6C7D8E92B31F6A7007B002 /* HideTicketFormFieldChoicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C7D8E92B31F6A7007B001 /* HideTicketFormFieldChoicesView.swift */; };
+		B8E7F9012B25C1D3003A004 /* TicketFormIdSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E7F9012B25C1D3003A003 /* TicketFormIdSheetView.swift */; };
 		56A3A5732B21BF05000177FA /* ChangeAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3A55F2B21BF05000177FA /* ChangeAccountView.swift */; };
 		56A3A5742B21BF05000177FA /* ConversationFaqsCategoryWithTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3A5602B21BF05000177FA /* ConversationFaqsCategoryWithTags.swift */; };
 		56A3A5772B21BF05000177FA /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3A5652B21BF05000177FA /* UserDetails.swift */; };
@@ -94,6 +102,14 @@
 		56A3A55C2B21BF05000177FA /* UpdateUserDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserDetailsView.swift; sourceTree = "<group>"; };
 		56A3A55D2B21BF05000177FA /* IdentifyUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifyUserView.swift; sourceTree = "<group>"; };
 		56A3A55E2B21BF05000177FA /* OpenSpecificConversationsInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSpecificConversationsInputView.swift; sourceTree = "<group>"; };
+		5A11D0010000000000000002 /* SendMessageToTopicInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageToTopicInputView.swift; sourceTree = "<group>"; };
+		A7F8E9D12B24A1B2001A0001 /* OpenArticleInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenArticleInputView.swift; sourceTree = "<group>"; };
+		B8E7F9012B25C1D3003A005 /* TicketFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketFormView.swift; sourceTree = "<group>"; };
+		C1D2E3F42B26A1B2001A0A1 /* PrefillTicketFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefillTicketFormView.swift; sourceTree = "<group>"; };
+		E3F4A5B62B28C3D4004E001 /* DisableTicketFormFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableTicketFormFieldsView.swift; sourceTree = "<group>"; };
+		F4A5B6C72B29D4E5005F001 /* HideTicketFormFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTicketFormFieldsView.swift; sourceTree = "<group>"; };
+		B6C7D8E92B31F6A7007B001 /* HideTicketFormFieldChoicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideTicketFormFieldChoicesView.swift; sourceTree = "<group>"; };
+		B8E7F9012B25C1D3003A003 /* TicketFormIdSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketFormIdSheetView.swift; sourceTree = "<group>"; };
 		56A3A55F2B21BF05000177FA /* ChangeAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAccountView.swift; sourceTree = "<group>"; };
 		56A3A5602B21BF05000177FA /* ConversationFaqsCategoryWithTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationFaqsCategoryWithTags.swift; sourceTree = "<group>"; };
 		56A3A5652B21BF05000177FA /* UserDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
@@ -177,6 +193,14 @@
 				97DE59512E756ED3000E5526 /* ShowUserDetailsView.swift */,
 				56A3A55D2B21BF05000177FA /* IdentifyUserView.swift */,
 				56A3A55E2B21BF05000177FA /* OpenSpecificConversationsInputView.swift */,
+				5A11D0010000000000000002 /* SendMessageToTopicInputView.swift */,
+				A7F8E9D12B24A1B2001A0001 /* OpenArticleInputView.swift */,
+				B8E7F9012B25C1D3003A003 /* TicketFormIdSheetView.swift */,
+				B8E7F9012B25C1D3003A005 /* TicketFormView.swift */,
+				C1D2E3F42B26A1B2001A0A1 /* PrefillTicketFormView.swift */,
+				E3F4A5B62B28C3D4004E001 /* DisableTicketFormFieldsView.swift */,
+				F4A5B6C72B29D4E5005F001 /* HideTicketFormFieldsView.swift */,
+				B6C7D8E92B31F6A7007B001 /* HideTicketFormFieldChoicesView.swift */,
 				56A3A55F2B21BF05000177FA /* ChangeAccountView.swift */,
 				56A3A5602B21BF05000177FA /* ConversationFaqsCategoryWithTags.swift */,
 				561EF6712B2325C6002FAC0B /* UpdateJWTView.swift */,
@@ -571,6 +595,14 @@
 				1944DCC92B0C7FC800584408 /* AppDelegate.swift in Sources */,
 				195708BD2BD92315003CD3BA /* ToastView.swift in Sources */,
 				56A3A5722B21BF05000177FA /* OpenSpecificConversationsInputView.swift in Sources */,
+				5A11D0010000000000000001 /* SendMessageToTopicInputView.swift in Sources */,
+				A7F8E9D12B24A1B2001A0002 /* OpenArticleInputView.swift in Sources */,
+				B8E7F9012B25C1D3003A004 /* TicketFormIdSheetView.swift in Sources */,
+				B8E7F9012B25C1D3003A006 /* TicketFormView.swift in Sources */,
+				C1D2E3F42B26A1B2001A0A2 /* PrefillTicketFormView.swift in Sources */,
+				E3F4A5B62B28C3D4004E002 /* DisableTicketFormFieldsView.swift in Sources */,
+				F4A5B6C72B29D4E5005F002 /* HideTicketFormFieldsView.swift in Sources */,
+				B6C7D8E92B31F6A7007B002 /* HideTicketFormFieldChoicesView.swift in Sources */,
 				56A5C31E2AFB68E600736CF5 /* OrderPlacedView.swift in Sources */,
 				56A3A5702B21BF05000177FA /* UpdateUserDetailsView.swift in Sources */,
 				19A2CBB22BBFB992004B937D /* SWUtils.swift in Sources */,

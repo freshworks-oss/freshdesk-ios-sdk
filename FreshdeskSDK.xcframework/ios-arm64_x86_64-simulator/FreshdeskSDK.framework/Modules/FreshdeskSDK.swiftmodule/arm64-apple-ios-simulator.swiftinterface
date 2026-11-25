@@ -230,7 +230,13 @@ extension FreshdeskSDK.Freshworks {
   #if compiler(>=5.3) && $NonescapableTypes
   nonisolated final public func openTopic(_ viewController: UIKit.UIViewController, topicId: Swift.Int?, topicName: Swift.String? = nil)
   #endif
+  nonisolated final public func messageToTopic(_ viewController: UIKit.UIViewController, topicId: Swift.Int, message: Swift.String, isDraft: Swift.Bool = true)
+  nonisolated final public func messageToTopic(_ viewController: UIKit.UIViewController, topicName: Swift.String, message: Swift.String, isDraft: Swift.Bool = true)
   nonisolated final public func openKnowledgeBase(_ viewController: UIKit.UIViewController)
+  nonisolated final public func openArticle(_ viewController: UIKit.UIViewController, articleId: Swift.Int)
+  #if compiler(>=5.3) && $NonescapableTypes
+  nonisolated final public func openTicketForm(_ viewController: UIKit.UIViewController, formId: Swift.Int? = nil)
+  #endif
   nonisolated final public func getUnreadCount() -> Swift.Int
   nonisolated final public func getSDKVersion() -> Swift.String
   nonisolated final public func runDiagnostics(completion: @escaping (FreshdeskSDK.FDDiagnosticReport) -> Swift.Void)
@@ -255,6 +261,11 @@ extension FreshdeskSDK.Freshworks {
   #if compiler(>=5.3) && $NonescapableTypes
   nonisolated final public func trackUserEvents(name: Swift.String, payload: [Swift.String : Swift.String]? = nil)
   #endif
+  nonisolated final public func prefillTicketForm(formId: Swift.Int, fields: [Swift.String : Any])
+  nonisolated final public func disableTicketFormFields(formId: Swift.Int, fields: [Swift.String])
+  nonisolated final public func hideTicketFormFields(formId: Swift.Int, fields: [Swift.String])
+  nonisolated final public func hideTicketFormFieldChoices(formId: Swift.Int, choices: [Swift.String : Any])
+  nonisolated final public func clearTicketForm(formId: Swift.Int)
 }
 extension FreshdeskSDK.Freshworks {
   #if compiler(>=5.3) && $NonescapableTypes

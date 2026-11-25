@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct FeatureTextfield: View {
     
     var title: String
     var placeholder: String
     var description: String? = nil
+    var keyboardType: UIKeyboardType = .default
     
     @Binding var content: String
     
@@ -26,6 +28,7 @@ struct FeatureTextfield: View {
             TextField(placeholder, text: $content)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .font(.system(size: 17))
+                .keyboardType(keyboardType)
                 .accessibilityIdentifier(title)
         }
     }

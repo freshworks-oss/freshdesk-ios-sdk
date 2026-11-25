@@ -36,6 +36,30 @@ final class SWUtilMethods {
     }
     
     
+    static func convertToJsonStringArray(from jsonString: String) -> [String]? {
+        guard let data = jsonString.data(using: .utf8) else {
+            return nil
+        }
+        do {
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            guard let array = jsonObject as? [Any] else {
+                return nil
+            }
+            var strings: [String] = []
+            strings.reserveCapacity(array.count)
+            for element in array {
+                guard let str = element as? String else {
+                    return nil
+                }
+                strings.append(str)
+            }
+            return strings
+        } catch {
+            print("Error deserializing JSON array of strings: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
     static func convertToJsonDictionary(from jsonString: String) -> [String: Any]? {
         guard let data = jsonString.data(using: .utf8) else {
             print("Error: Could not convert string to Data using UTF-8 encoding.")

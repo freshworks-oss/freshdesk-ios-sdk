@@ -11,6 +11,7 @@ struct FeatureTextEditor: View {
     var title: String
     var placeholder: String
     var description: String? = nil
+    var editorHeight: CGFloat = 140
     
     @Binding var content: String
     
@@ -26,7 +27,7 @@ struct FeatureTextEditor: View {
             
             ZStack(alignment: .topLeading) {
                 TextEditor(text: $content)
-                    .frame(height: 140)
+                    .frame(height: editorHeight)
                     .cornerRadius(4)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
