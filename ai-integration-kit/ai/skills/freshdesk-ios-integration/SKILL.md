@@ -1,6 +1,6 @@
 ---
 name: freshdesk-ios-integration
-description: Integrate, debug, and verify the Freshdesk iOS SDK (FreshdeskSDK / Freshchat) in a host iOS app. Runs Freshdesk.runDiagnostics, reads the structured FDDiagnosticReport, and applies each check's fixHint. Consults official Freshdesk setup and JWT documentation when the diagnostics signal alone is insufficient. Use when the user mentions FreshdeskSDK, Freshchat, Freshdesk.initialize, FreshdeskSDKConfig, JWT authentication for Freshdesk chat, push notifications for Freshdesk, customising or localising the Freshdesk widget's static text (ContentConfiguration / setContentConfiguration), or asks to diagnose why the Freshdesk widget, support chat, or notifications are not working.
+description: Integrate, debug, and verify the Freshdesk iOS SDK (FreshdeskSDK / Freshchat) in a host iOS app. Runs Freshdesk.runDiagnostics, reads the structured FDDiagnosticReport, and applies each check's fixHint. Consults official Freshdesk setup and JWT documentation when the diagnostics signal alone is insufficient. Use when the user mentions FreshdeskSDK, Freshchat, Freshdesk.initialize, FreshdeskSDKConfig, JWT authentication for Freshdesk chat, push notifications for Freshdesk, opening specific articles or ticket forms (openArticle / openTicketForm) and prefilling, disabling or hiding ticket form fields, customising or localising the Freshdesk widget's static text (ContentConfiguration / setContentConfiguration), or asks to diagnose why the Freshdesk widget, support chat, or notifications are not working.
 ---
 
 # Freshdesk iOS SDK Integration
@@ -19,7 +19,7 @@ Apply this skill when:
 - The user is integrating FreshdeskSDK into an iOS app for the first time, or asks to add Freshdesk support to their app.
 - The user reports a Freshdesk-specific symptom: widget does not open, push notifications do not arrive, JWT authentication fails, build errors after adding the SDK, etc.
 - The user asks to verify or audit an existing FreshdeskSDK integration.
-- The user mentions `Freshdesk.initialize`, `Freshchat`, `FreshdeskSDKConfig`, `FreshdeskJWTDelegate`, `setUserDetails`, `setTicketProperties`, `runDiagnostics`, `setPushRegistrationToken`, `handleRemoteNotification`, `authenticateAndUpdate`, `openSupport`, `openTopic`, `openKnowledgeBase`, `Configuration`, `ContentConfiguration`, or `setContentConfiguration`.
+- The user mentions `Freshdesk.initialize`, `Freshchat`, `FreshdeskSDKConfig`, `FreshdeskJWTDelegate`, `setUserDetails`, `setTicketProperties`, `runDiagnostics`, `setPushRegistrationToken`, `handleRemoteNotification`, `authenticateAndUpdate`, `openSupport`, `openTopic`, `openKnowledgeBase`, `openArticle`, `openTicketForm`, `prefillTicketForm`, `Configuration`, `ContentConfiguration`, or `setContentConfiguration`.
 - The user wants to customise or localise the widget's static text (chat header, FAQ labels, placeholders, ticket form, privacy policy, response-time messages).
 
 Do NOT use this skill for:
@@ -161,11 +161,41 @@ Freshdesk.openSupport(self)              // self = the presenting UIViewControll
 // Specific topic
 Freshdesk.openTopic(self, topicId: <id>, topicName: "<name>")
 
+// Open a topic and draft (default) or send a message in it
+Freshdesk.messageToTopic(self, topicName: "<name>", message: "<text>")                   // draft only, NOT sent
+Freshdesk.messageToTopic(self, topicId: <id>, message: "<text>", isDraft: false)         // sends the message
+
 // Knowledge base
 Freshdesk.openKnowledgeBase(self)
+
+// A specific knowledge-base article (id from .../a/solutions/articles/{article-id})
+Freshdesk.openArticle(self, articleId: <id>)
+
+// Ticket form: default, or a specific form (id from .../ticket-forms/{form-id}/edit)
+Freshdesk.openTicketForm(self)
+Freshdesk.openTicketForm(self, formId: <id>)
 ```
 
 Place the call inside the action handler the user pointed at (button tap, menu row, etc.). For SwiftUI views that do not own a UIViewController, route through a `UIViewControllerRepresentable` or capture the topmost view controller from the app's window scene.
+
+### Step A4b: Ticket forms (only if the user wants them)
+
+Ask for the `formId` and the field keys; never invent them. Field keys must match the portal's ticket form (list via `https://{domain}/api/v2/admin/ticket_fields`). The customisation APIs are keyed by `formId`; use the same id for every call (the README shows them applied before opening the form):
+
+```swift
+Freshdesk.prefillTicketForm(formId: <id>, fields: [
+    "subject": "Damaged order",
+    "priority": 1,
+    "customFields": ["cf_reference_number": 223]
+])
+Freshdesk.disableTicketFormFields(formId: <id>, fields: ["subject"])
+Freshdesk.hideTicketFormFields(formId: <id>, fields: ["custom_fields.cf_reference_number"])
+Freshdesk.hideTicketFormFieldChoices(formId: <id>, choices: ["priority": [2, 3], "custom_fields": ["cf_dp": ["Second Choice"]]])
+Freshdesk.clearTicketForm(formId: <id>)   // reset prefilled values
+Freshdesk.openTicketForm(self, formId: <id>)
+```
+
+Values must be JSON-serialisable; invalid payloads are logged and dropped (enable `enableDebugLogs(true)` to see it).
 
 ### Step A5: Wire user identification (only if applicable)
 
@@ -498,7 +528,7 @@ For worked integration and debugging scenarios, see [examples.md](examples.md).
 
 ## Advanced APIs
 
-This skill focuses on integrate-and-debug workflows. For APIs not covered here — `resetUser`, unread-count observers (`FDEvents`), custom link handling, dismissing SDK views, and the full `ContentConfiguration` field list — see the [SDK README](https://github.com/freshworks/freshdesk-ios-sdk/blob/main/README.md).
+This skill focuses on integrate-and-debug workflows. For APIs not covered here — `resetUser`, unread-count observers (`FDEvents`), custom link handling (`setCustomLinkHandler`), `getUnreadCount()`, dismissing SDK views (`dismissFreshdeskSDKViews`), and the full `ContentConfiguration` field list — see the [SDK README](https://github.com/freshworks/freshdesk-ios-sdk/blob/main/README.md).
 
 ## Reference links
 

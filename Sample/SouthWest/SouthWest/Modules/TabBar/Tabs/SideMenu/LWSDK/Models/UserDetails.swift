@@ -20,6 +20,17 @@ extension UserDefaults {
         //Parallel conversation
         removeObject(forKey: Constants.UserDefaultsKeys.topicIdForConversation)
         removeObject(forKey: Constants.UserDefaultsKeys.topicNameForConversation)
+        removeObject(forKey: Constants.UserDefaultsKeys.articleIdForOpenArticle)
+        removeObject(forKey: Constants.UserDefaultsKeys.ticketFormOpenFormId)
+        removeObject(forKey: Constants.UserDefaultsKeys.ticketFormClearFormId)
+        removeObject(forKey: Constants.UserDefaultsKeys.prefillTicketFormId)
+        removeObject(forKey: Constants.UserDefaultsKeys.prefillTicketFormPayloadJson)
+        removeObject(forKey: Constants.UserDefaultsKeys.disableTicketFormFieldsFormId)
+        removeObject(forKey: Constants.UserDefaultsKeys.disableTicketFormFieldsPayloadJson)
+        removeObject(forKey: Constants.UserDefaultsKeys.hideTicketFormFieldsFormId)
+        removeObject(forKey: Constants.UserDefaultsKeys.hideTicketFormFieldsPayloadJson)
+        removeObject(forKey: Constants.UserDefaultsKeys.hideTicketFormFieldChoicesFormId)
+        removeObject(forKey: Constants.UserDefaultsKeys.hideTicketFormFieldChoicesPayloadJson)
         
         //Tags
         removeObject(forKey: Constants.UserDefaultsKeys.tags)

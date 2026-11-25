@@ -112,30 +112,36 @@ NotificationCenter.default.addObserver(self, selector: #selector(handleFreshchat
    The old `FCEventIdTokenStatusChange` branch moves entirely out of this method — call `Freshdesk.setJWTDelegate(self)` in the init block (Step 4) and implement `userStateChanged(_:)` there instead of inside this notification handler.
 3. Report: 1 gap marker (FAQ tracking), 2 direct rewrites, 1 relocated to a different mechanism (delegate, not notification) — call that relocation out explicitly in the summary so the developer doesn't go looking for it in the notification handler later.
 
-## Example 4: `sendMessage` — a gap with a behaviorally-different workaround
+## Example 4: `sendMessage` — tag-based becomes topic-based (`messageToTopic`)
 
 User: "On our 'Report a problem' screen we pre-fill and send the first message for the user with `sendMessage`."
 
 ```swift
-// Before
+// Before (tag-based)
 let m = FreshchatMessage(message: "App crashed on checkout, order #\(orderId)", andTag: "bug-report")
 Freshchat.sharedInstance().sendMessage(m)
 ```
 
-1. `api-mapping.md` §Messaging: confirmed no equivalent. The workaround is not equivalent behavior — `setTicketProperties` + `openTopic` requires the user to actually send a message before the properties reach Freshdesk, whereas `sendMessage` created the conversation immediately with no user action.
-2. Apply the Gap comment template with that behavioral caveat spelled out, plus the best-effort workaround underneath it (not a silent drop, since a reasonable substitute exists — just not an equivalent one):
+1. `api-mapping.md` §Messaging and bots: Freshchat routes by **tag**; Freshdesk's `messageToTopic` routes by **topic** (name or id). The tag `"bug-report"` has no automatic Freshdesk counterpart.
+2. Ask the user (or check the Freshdesk portal) which topic `"bug-report"` maps to. Do not invent a topic name from the tag string. Suppose the answer is the topic `"Bug Report"` (id `4521`).
+3. Rewrite the call. Because the original **sent immediately**, pass `isDraft: false` — the default (`true`) would only pre-fill the composer and never send:
    ```swift
-   // FRESHCHAT-MIGRATION-GAP: Programmatic message sending
-   // No Freshdesk iOS SDK equivalent exists as of SDK 1.4.1 (see api-mapping.md §Messaging and bots).
-   // Why it mattered here: pre-filled and immediately sent a bug-report message with no user action needed.
-   // Suggested workaround (NOT equivalent — requires the user to send a message before this reaches
-   // Freshdesk, unlike the original which sent immediately):
-   Freshdesk.setTicketProperties(with: ["order_id": orderId, "issue": "checkout_crash"])
-   Freshdesk.openTopic(self, topicId: nil, topicName: "Bug Report")
-   // Decision needed: is requiring the user to type a message (even a generic "please describe what
-   // happened") acceptable here, or should this flow be redesigned?
+   // Before: tag "bug-report" -> After: Freshdesk topic "Bug Report"
+   Freshdesk.messageToTopic(self,
+                            topicName: "Bug Report",   // or topicId: 4521
+                            message: "App crashed on checkout, order #\(orderId)",
+                            isDraft: false)
+   ```
+4. Behavior differences to report: (a) this presents the Freshdesk widget from `self` — `sendMessage` did not necessarily show UI; (b) the send fires when the widget is ready, so `FDEvents.messageSent` is the way to confirm it; (c) if the topic doesn't exist, the widget may fall back to Support Home.
+5. If the user cannot say which topic a tag maps to, insert the Gap marker instead, with the call above as the suggested replacement:
+   ```swift
+   // FRESHCHAT-MIGRATION-GAP: sendMessage tag -> topic mapping
+   // Freshchat sendMessage is tag-based; Freshdesk messageToTopic is topic-based (see api-mapping.md §Messaging and bots).
+   // Why it mattered here: sent a pre-filled bug-report message with no user action.
+   // Suggested workaround: Freshdesk.messageToTopic(self, topicName: "<topic for tag 'bug-report'>", message: "...", isDraft: false)
+   // Decision needed: which Freshdesk topic (name or id) replaces tag "bug-report".
    // Original Freshchat code (will not compile once FreshchatSDK is removed):
    // let m = FreshchatMessage(message: "App crashed on checkout, order #\(orderId)", andTag: "bug-report")
    // Freshchat.sharedInstance().sendMessage(m)
    ```
-3. Report this gap with the behavioral caveat highlighted — this is exactly the kind of change that looks like it "works" (code compiles, ticket properties get set) but silently changes the UX in a way product should sign off on.
+6. Report: 1 changed call (tag → topic, `isDraft: false` required), plus the open question about the topic mapping if unresolved.

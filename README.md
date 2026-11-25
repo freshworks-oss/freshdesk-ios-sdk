@@ -31,6 +31,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 `token, host, sdkId`  ==> Admin settings -> Mobile Chat SDK -> Select a SDK needed -> Under App Keys
 `jwtToken` ==> Generate your JWT token based on encryption key under SDK or SDK linked web chat widget
 `locale` ==> Add supported locale for widget, localisation is supported only during the initialisation
+`config` ==> To override the SDK’s built-in default static strings, check Content Configuration / Localisation below for more details.
 
 ### UserCreation 
 - Listeners are required for `User Created` generated.
@@ -94,10 +95,90 @@ Note: self --> current viewcontroller
         Freshdesk.openKnowledgeBase(self)
     ```
 - Open a specific topic
-    Customize your ticket by adding specific topic filter during creation. To implement, pass specific topic id and topic name with openTopic public api call for relevant topic.
+    Customize your ticket by adding specific topic filter during creation. To implement, pass specific topic id (obtained from topic page url like ...widgets/topics/{topic-id}) and topic name with openTopic public api call for relevant topic.
     ```swift
         Freshdesk.openTopic(self, topicId: topic-id, topicName: "topic-name")
     ```
+- Draft or send a message to a topic
+    `messageToTopic` opens the SDK on a topic (by id or name) and places a message in its reply editor. By default the text is only saved as a **draft** and is **not sent**; pass `isDraft: false` to send it.
+    ```swift
+        // Save a draft (default)
+        Freshdesk.messageToTopic(self, topicName: "Order Support", message: "Where is my order?")
+
+        // Send it
+        Freshdesk.messageToTopic(self, topicId: 12345, message: "Where is my order?", isDraft: false)
+    ```
+- Open a specific article
+    Directly launch a particular knowledge base article by passing its article id (obtained from specific article page url like ../a/solutions/articles/{article-id}?lang=en) with the openArticle public api call.
+    ```swift
+        Freshdesk.openArticle(self, articleId: article-id)
+    ```
+
+### Ticket Forms
+Note: self --> current viewcontroller. 
+      form-id --> Obtained from specific form url like - .../ticket-forms/{form-id}/edit
+      Field names must match those configured on the ticket form in your Freshdesk portal. Field key values can be obtained using URL https://{your-domain}/api/v2/admin/ticket_fields
+#### Open ticket form
+
+Launch the ticket form. Pass a form id to open a specific form, or omit it to open the default form.
+```swift
+    // Default ticket form
+    Freshdesk.openTicketForm(self)
+
+    // Specific ticket form
+    Freshdesk.openTicketForm(self, formId: form-id)
+```
+#### Prefill ticket form fields
+
+Pre-populate ticket form field values before the user submits.
+```swift
+    let fields: [String: Any] = [
+        "subject": "Damaged order",
+        "description": "I received a damaged product",
+        "priority": 1,
+        "customFields": [
+            "cf_reference_number": 223
+        ]
+    ]
+    Freshdesk.prefillTicketForm(formId: form-id, fields: fields)
+```
+#### Disable ticket form fields
+
+Disable specific fields so they cannot be edited.
+```swift
+    Freshdesk.disableTicketFormFields(
+        formId: form-id,
+        fields: ["subject", "custom_fields.cf_reference_number"]
+    )
+```
+#### Hide ticket form fields
+
+Hide specific fields from the ticket form.
+```swift
+    Freshdesk.hideTicketFormFields(
+        formId: form-id,
+        fields: ["subject", "custom_fields.cf_reference_number"]
+    )
+```
+#### Hide ticket form field choices
+
+Hide specific dropdown or choice values for a field.
+```swift
+    let choices: [String: Any] = [
+        "priority": [2, 3],
+        "custom_fields": [
+            "cf_dp": ["Second Choice"]
+        ]
+    ]
+    Freshdesk.hideTicketFormFieldChoices(formId: form-id, choices: choices)
+```
+#### Clear ticket form
+
+Clear all prefilled values for a ticket form.
+```swift
+    Freshdesk.clearTicketForm(formId: form-id)
+```
+
 ### Unread count
     Get existing unread count value
 ```swift

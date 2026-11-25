@@ -2,7 +2,7 @@
 
 Reference data for the [migration skill](SKILL.md)'s Step 5 loop. Look up the Freshchat symbol you found in the customer's code in the table below, then jump to the linked section for the exact before/after code and gotchas.
 
-**Source of truth:** Freshchat iOS SDK `6.5.0` (`FreshchatSDK.h`, deployment target iOS 12.0) and Freshdesk iOS SDK `1.4.1` (`SDK_VERSION` in `FDConstants.swift`). Every Freshdesk-side signature below was verified directly against `Sources/FreshdeskSDK` in `freshworks/freshdesk_ios_sdk_dev` @ `main`, not only against README/portal docs (those have known errors — see the discrepancies noted inline). If you are running this skill against a newer SDK release, re-grep the symbol before trusting a signature verbatim; treat every code sample here as "verified as of 1.4.1", not as a live contract.
+**Source of truth:** Freshchat iOS SDK `6.5.0` (`FreshchatSDK.h`, deployment target iOS 12.0) and Freshdesk iOS SDK `1.4.2` (`SDK_VERSION` in `FDConstants.swift`). Every Freshdesk-side signature below was verified directly against `Sources/FreshdeskSDK` in `freshworks/freshdesk_ios_sdk_dev` @ `main`, not only against README/portal docs (those have known errors — see the discrepancies noted inline). If you are running this skill against a newer SDK release, re-grep the symbol before trusting a signature verbatim; treat every code sample here as "verified as of 1.4.2", not as a live contract.
 
 ## Quick lookup — Freshchat symbol → action
 
@@ -15,7 +15,7 @@ Grep the customer's code for the left-hand column; the right-hand columns tell y
 | `Freshchat.sharedInstance()` | Replace | `Freshdesk` (global constant, not a type — cannot subclass/extend) | [§Entry point](#entry-point-and-initialization) |
 | `FreshchatConfig(appID:andAppKey:)` + properties | Replace | `FreshdeskSDKConfig(token:host:sdkId:jwtToken:locale:config:shouldEnableLogs:hostPlatform:)` | [§Entry point](#entry-point-and-initialization) |
 | `initWith(config)` | Replace | `initialize(with:)` | [§Entry point](#entry-point-and-initialization) |
-| `Freshchat.sdkVersion()` | Replace | `getSDKVersion() -> String` (returns `"1.4.1"`) | Direct |
+| `Freshchat.sdkVersion()` | Replace | `getSDKVersion() -> String` (returns `"1.4.2"`) | Direct |
 | `config.errorLogsEnabled` | Replace | `enableDebugLogs(_:)`, or `shouldEnableLogs` at init | Direct |
 | — (no Freshchat equivalent) | New capability | `runDiagnostics(completion:)` → `FDDiagnosticReport` | [§Diagnostics](#diagnostics) |
 | `FreshchatUser.sharedInstance()` + `setUser(_:)` | Replace | `setUserDetails(with: [String: Any])` | [§Identity](#identity-and-user-properties) |
@@ -36,10 +36,13 @@ Grep the customer's code for the left-hand column; the right-hand columns tell y
 | `getFAQsControllerForEmbed` / `WithOptions:` | **Gap** | none — Freshdesk is presentation-only, no embeddable view controller | [§Opening the UI](#opening-the-sdk-ui) |
 | `getConversationsControllerForEmbed` / `WithOptions:` | **Gap** | none — same as above | [§Opening the UI](#opening-the-sdk-ui) |
 | `openFreshchatDeeplink(_:viewController:)` | **Gap** | none — route to `openSupport`/`openTopic` instead and accept the coarser landing point | [§Opening the UI](#opening-the-sdk-ui) |
+| — (no Freshchat equivalent) | New capability | `openArticle(_:articleId:)` — open a specific knowledge-base article | [§Opening the UI](#opening-the-sdk-ui) |
+| — (no Freshchat ticket forms) | New capability | `openTicketForm(_:formId:)`, `prefillTicketForm`, `disableTicketFormFields`, `hideTicketFormFields`, `hideTicketFormFieldChoices`, `clearTicketForm` | [§Ticket forms](#ticket-forms-new-capability) |
 | `dismissFreshchatViews()` | Replace | `dismissFreshdeskSDKViews()` | [§Opening the UI](#opening-the-sdk-ui) |
 | `updateConversationBannerMessage(_:)` | **Gap** | none — static copy only via `ContentConfiguration.headers` | [§Opening the UI](#opening-the-sdk-ui) |
-| `sendMessage(FreshchatMessage)` (tag or reference-ID form) | **Gap** | none — user must type; workaround via `setTicketProperties` + `openTopic` | [§Messaging and bots](#messaging-and-bots-with-no-equivalent) |
-| `setBotVariables(_:withBotSpecificVariables:)` | **Gap** | none — workaround via `setUserDetails`/`setTicketProperties` | [§Messaging and bots](#messaging-and-bots-with-no-equivalent) |
+| `sendMessage(FreshchatMessage)` — tag form (`FreshchatMessage(message:andTag:)`) | **Changed** (tag → topic) | `messageToTopic(_:topicName:message:isDraft:)` or `messageToTopic(_:topicId:message:isDraft:)` — **topic-based, not tag-based**; pass `isDraft: false` to send | [§Messaging and bots](#messaging-and-bots) |
+| `sendMessage(FreshchatMessage)` — reference-ID form (`ConversationOptions`/`conversationReferenceID`) | **Gap** (partial) | `messageToTopic` targets a topic only; no per-reference thread | [§Messaging and bots](#messaging-and-bots) |
+| `setBotVariables(_:withBotSpecificVariables:)` | **Gap** | none — workaround via `setUserDetails`/`setTicketProperties` | [§Messaging and bots](#messaging-and-bots) |
 | `unreadCount(completion:)` | Replace | `getUnreadCount() -> Int` — **now synchronous** | [§Unread count](#unread-count) |
 | `FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED` | Replace | `FDEvents.unreadCount`, `object` = `Int` | [§Unread count](#unread-count) |
 | `unreadCount(forTags:completion:)` | **Gap** | none | [§Unread count](#unread-count) |
@@ -217,21 +220,59 @@ Freshchat.sharedInstance().dismissFreshchatViews()   -> Freshdesk.dismissFreshde
   ```
   There is no live `openConversation` method in the public API — apply the same "comment it, annotate it, let the developer decide" treatment to any Freshchat call with no mapping.
 
-## Messaging and bots with no equivalent
+## Ticket forms (new capability)
+
+Freshchat has no ticket forms, so there is nothing to migrate — but the Freshdesk SDK offers them, and apps that routed users to email/web forms for tickets may want them. **Do not add these during migration unless the user asks**; mention them in the hand-off.
 
 ```swift
-// Before — no migration path, apply the Gap comment template verbatim
-let m1 = FreshchatMessage(message: "Need help with my order", andTag: "orders")
-Freshchat.sharedInstance().sendMessage(m1)
+Freshdesk.openTicketForm(self)                      // default form
+Freshdesk.openTicketForm(self, formId: 123)         // specific form (id from .../ticket-forms/{form-id}/edit)
+Freshdesk.openArticle(self, articleId: 456)         // specific KB article (id from .../a/solutions/articles/{id})
 
-Freshchat.sharedInstance().setBotVariables(["userTier": "gold"], withBotSpecificVariables: [:])
+Freshdesk.prefillTicketForm(formId: 123, fields: ["subject": "Damaged order", "priority": 1,
+                                                   "customFields": ["cf_reference_number": 223]])
+Freshdesk.disableTicketFormFields(formId: 123, fields: ["subject"])
+Freshdesk.hideTicketFormFields(formId: 123, fields: ["custom_fields.cf_reference_number"])
+Freshdesk.hideTicketFormFieldChoices(formId: 123, choices: ["priority": [2, 3]])
+Freshdesk.clearTicketForm(formId: 123)
 ```
 
-- `sendMessage` (both the tag form and the reference-ID form): no API to pre-fill or send a message programmatically. The end user must type. Workaround (behaviorally different — properties only reach Freshdesk after the user's first message, they don't create the conversation immediately the way `sendMessage` did):
-  ```swift
-  Freshdesk.setTicketProperties(with: ["order_id": "ORD-123", "issue": "package_not_delivered"])
-  Freshdesk.openTopic(self, topicId: nil, topicName: "Order Support")
-  ```
+Field keys must match the portal's ticket form (list them via `https://{domain}/api/v2/admin/ticket_fields`). Never invent a `formId`, `articleId` or field key — ask the user.
+
+## Messaging and bots
+
+### `sendMessage` → `messageToTopic` (topic-based)
+
+Freshchat's `sendMessage(_:)` is **tag-based**: `FreshchatMessage(message:andTag:)` routes the message to whichever channel carries that tag. Freshdesk has no channels or tags — its equivalent, `messageToTopic`, is **topic-based**: it opens the SDK on a topic (by name or id) and places the message in that topic's reply editor.
+
+```swift
+// Before (tag-based)
+let m = FreshchatMessage(message: "Need help with my order", andTag: "orders")
+Freshchat.sharedInstance().sendMessage(m)
+
+// After (topic-based) — by topic name
+Freshdesk.messageToTopic(self, topicName: "Order Support", message: "Need help with my order", isDraft: false)
+
+// After — by topic id
+Freshdesk.messageToTopic(self, topicId: 12345, message: "Need help with my order", isDraft: false)
+```
+
+Signatures (both `isDraft` default to `true`):
+```swift
+func messageToTopic(_ viewController: UIViewController, topicId: Int, message: String, isDraft: Bool = true)
+func messageToTopic(_ viewController: UIViewController, topicName: String, message: String, isDraft: Bool = true)
+```
+
+Migration rules:
+- **Tag → topic is a product decision, not a rename.** Ask the user which Freshdesk topic (name or id, from the Freshdesk portal) each Freshchat tag maps to. Never guess a topic name or id from the tag string; if the mapping is unknown, leave a `FRESHCHAT-MIGRATION-GAP` marker (see [SKILL.md](SKILL.md#gap-comment-template)) with the original code commented out and the `messageToTopic` call as the suggested replacement.
+- **`isDraft` defaults to `true`, which does NOT send.** Freshchat's `sendMessage` sent immediately, so a faithful migration must pass `isDraft: false`. Omitting it silently turns the call into "pre-fill the composer" — the code compiles and runs but the message is never sent. Use the default only if the original flow was meant to pre-fill.
+- **Always presents the UI.** Unlike `sendMessage`, which could run without showing the screen, `messageToTopic` presents the Freshdesk widget from the `viewController` you pass in (same as `openTopic`). It is not a headless call; flag this if the original code sent messages silently in the background.
+- **Reference-ID form is still a gap.** `sendMessage` used with a conversation reference ID (parallel conversations) has no per-reference thread in Freshdesk. `messageToTopic` can deliver the text to a topic but not to a persisted per-reference conversation — treat it as a partial gap and say so in the marker.
+- **Topic must exist.** If the topic name/id doesn't exist in the portal, the widget may fall back to the Support Home screen.
+- To confirm a send happened, observe `FDEvents.messageSent` (see §Events) — it is broadcast only when `isDraft: false` actually sends.
+
+### Bots and banners
+
 - `setBotVariables(_:withBotSpecificVariables:)`: no equivalent. Workaround: pass the same values via `setUserDetails`/`setTicketProperties` (whitelisted in the portal) and reference them from bot/automation rules server-side — confirm with the Freshdesk admin that the bot flows can actually read those fields.
 - `updateConversationBannerMessage(_:)`: no equivalent. Static copy only, via `ContentConfiguration.headers` — there is no dynamic per-session banner.
 
@@ -405,7 +446,7 @@ These `FreshchatConfig` properties have **no `FreshdeskSDKConfig` counterpart**.
 | `stringsBundle` | nil | `ContentConfiguration` + init-only `locale` |
 | `domain` | — | Replaced by `host` (full portal URL) |
 
-## Appendix — Freshchat APIs confirmed absent from Freshdesk 1.4.1
+## Appendix — Freshchat APIs confirmed absent from Freshdesk 1.4.2 (tag-based `sendMessage` is now covered by `messageToTopic` — see §Messaging and bots)
 
 Consolidated planning list. Every one of these needs the [Gap comment template](SKILL.md#gap-comment-template), not a rewrite:
 
@@ -414,7 +455,7 @@ Consolidated planning list. Every one of these needs the [Gap comment template](
 | `identifyUser(withExternalID:restoreID:)` | Identity |
 | `getUserIdTokenStatus()` | Identity |
 | `setBotVariables(_:withBotSpecificVariables:)` | Bots |
-| `FreshchatMessage` + `sendMessage(_:)` (tag and reference-ID forms) | Messaging |
+| `sendMessage(_:)` with a conversation reference ID (per-reference thread) | Messaging |
 | `ConversationOptions.filter(byTags:withTitle:)` | Filtering |
 | `ConversationOptions.setTopicName(_:withReferenceID:)` | Parallel conversations |
 | `showConversation(_:withTopicName:withConversationReferenceID:)` as a persisted thread | Parallel conversations |
@@ -435,7 +476,7 @@ Consolidated planning list. Every one of these needs the [Gap comment template](
 
 | | Freshchat iOS | Freshdesk iOS |
 |---|---|---|
-| Version | `6.5.0` | `1.4.1` |
+| Version | `6.5.0` | `1.4.2` |
 | Module | `FreshchatSDK` | `FreshdeskSDK` |
 | Public facade | `Freshchat.sharedInstance()` | `Freshdesk` (`= Freshworks.shared`, a global constant) |
 | Distribution | CocoaPods or SPM | **SPM only** |

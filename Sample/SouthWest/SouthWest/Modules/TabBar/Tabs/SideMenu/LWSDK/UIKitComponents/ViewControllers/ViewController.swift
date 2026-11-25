@@ -54,6 +54,45 @@ final class ViewController: UIViewController {
         present(openSpecificConversationsInputView)
     }
     
+    @IBAction func didTapSendMessage(_ sender: UIButton) {
+        let sendMessageInputView = SendMessageToTopicInputView { [weak self] request in
+            guard let self else { return }
+            self.dismiss(animated: false) {
+                guard let request else { return }
+                switch request.topic {
+                case .id(let topicId):
+                    Freshdesk.messageToTopic(self, topicId: topicId, message: request.message, isDraft: request.isDraft)
+                case .name(let topicName):
+                    Freshdesk.messageToTopic(self, topicName: topicName, message: request.message, isDraft: request.isDraft)
+                }
+                self.setDismissButton()
+            }
+        }
+        present(sendMessageInputView)
+    }
+    
+    @IBAction func didTapTicketForm(_ sender: UIButton) {
+        let hosting = UIHostingController(rootView: TicketFormView())
+        hosting.navigationItem.title = Constants.Features.TicketForm.screenTitle
+        navigationController?.pushViewController(hosting, animated: true)
+    }
+    
+    @IBAction func didTapOpenArticle(_ sender: UIButton) {
+        let openArticleInputView = OpenArticleInputView { [weak self] articleIdText, shouldOpenArticle in
+            guard let self else { return }
+            self.dismiss(animated: false) {
+                guard shouldOpenArticle else { return }
+                if let articleId = Int(articleIdText) {
+                    Freshdesk.openArticle(self, articleId: articleId)
+                    self.setDismissButton()
+                } else {
+                    self.showToast(message: Constants.Toast.invalidArticleId)
+                }
+            }
+        }
+        present(openArticleInputView)
+    }
+    
     @IBAction func didTapResetUser(_ sender: UIButton) {
         resetUser { [weak self] in
             self?.showToast(message: Constants.Toast.userResetSuccess)
