@@ -242,6 +242,7 @@ extension FreshdeskSDK.Freshworks {
   nonisolated final public func runDiagnostics(completion: @escaping (FreshdeskSDK.FDDiagnosticReport) -> Swift.Void)
   nonisolated final public func setCustomLinkHandler(handler: @escaping (Foundation.URL) -> ())
   nonisolated final public func dismissFreshdeskSDKViews()
+  nonisolated final public func setBotVariables(with botVariables: [Swift.String : Any])
 }
 extension FreshdeskSDK.Freshworks {
   nonisolated final public func setPushRegistrationToken(_ deviceToken: Foundation.Data)

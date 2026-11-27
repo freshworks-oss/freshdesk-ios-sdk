@@ -42,8 +42,11 @@ extension UserDefaults {
         //Ticket Properties
         removeObject(forKey: Constants.UserDefaultsKeys.ticketProperties)
         
-        //Bot variables
+        //User Properties
         removeObject(forKey: Constants.UserDefaultsKeys.userProperties)
+        
+        //Bot variables
+        removeObject(forKey: Constants.UserDefaultsKeys.botVariables)
         
         //Header and content property
         removeObject(forKey: Constants.UserDefaultsKeys.headerProperty)

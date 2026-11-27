@@ -145,3 +145,43 @@ Freshchat.sharedInstance().sendMessage(m)
    // Freshchat.sharedInstance().sendMessage(m)
    ```
 6. Report: 1 changed call (tag → topic, `isDraft: false` required), plus the open question about the topic mapping if unresolved.
+
+## Example 5: `setBotVariables` — two dictionaries become one, keyed by topic
+
+User: "Before opening chat we set bot variables: the customer's name and plan for every bot, and a different plan value for our orders bot."
+
+```swift
+// Before
+Freshchat.sharedInstance().setBotVariables(
+    ["customername": user.name, "plan": user.plan],
+    withBotSpecificVariables: ["orders-bot": ["plan": "priority"]])
+Freshchat.sharedInstance().showConversations(self)
+```
+
+1. [api-mapping.md §Messaging and bots](api-mapping.md#messaging-and-bots): Freshdesk's `setBotVariables(with:)` takes one dictionary. The bot-specific values move under `fd_override_bot_property`, keyed by Freshdesk **topic id**.
+2. Ask the user which Freshdesk topic the orders bot runs in. Don't derive it from `"orders-bot"`. Suppose the answer is topic id `20`.
+3. Rewrite both calls:
+   ```swift
+   Freshdesk.setBotVariables(with: [
+       "customername": user.name,
+       "plan": user.plan,
+       "fd_override_bot_property": [
+           "20": ["plan": "priority"]   // topic id as a String key, not 20
+       ]
+   ])
+   Freshdesk.openSupport(self)   // was showConversations; not the same first screen, see api-mapping.md §Opening the UI
+   ```
+4. Check the values. They are all strings here. A `Date`, a custom type, or an `Int` key such as `20` would make the SDK drop the whole call (see api-mapping.md §Messaging and bots), so convert them before the call.
+5. If the user can't say which topic replaces `"orders-bot"`, migrate the shared variables and leave the bot-specific part as a Gap marker:
+   ```swift
+   Freshdesk.setBotVariables(with: ["customername": user.name, "plan": user.plan])
+   // FRESHCHAT-MIGRATION-GAP: bot-specific variables (bot → topic mapping)
+   // Freshdesk keys bot-specific values by topic id under fd_override_bot_property (see api-mapping.md §Messaging and bots).
+   // Why it mattered here: gave the orders bot a different "plan" value.
+   // Suggested workaround: add "fd_override_bot_property": ["<topic id>": ["plan": "priority"]] to the call above.
+   // Decision needed: which Freshdesk topic id replaces Freshchat bot "orders-bot".
+   // Original Freshchat code (will not compile once FreshchatSDK is removed):
+   // Freshchat.sharedInstance().setBotVariables(["customername": user.name, "plan": user.plan],
+   //     withBotSpecificVariables: ["orders-bot": ["plan": "priority"]])
+   ```
+6. Report: 1 changed call (two dictionaries → one), the open topic question if unresolved, and a reminder to confirm with the Freshdesk admin that `customername` and `plan` exist in the Freshdesk bot flow. JWT enforcement doesn't affect this call.

@@ -15,6 +15,10 @@ HOW TO USE (for developers):
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-11-27
+#### Enhancement
+- Added the setBotVariables API for passing variables to structured bots, along with support for closing the SDK screen and opening URLs.
+
 ## [1.5.0] - 2026-11-25
 #### Enhancements
 - Added Ticket Form APIs to open a specific form, pre-populate field, disable or hide specific fields, hide field choices, and clear the ticket form.

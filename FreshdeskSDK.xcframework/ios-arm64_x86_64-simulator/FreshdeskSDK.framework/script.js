@@ -31,6 +31,7 @@ function initialSetupAndRegisterEvent() {
     setupUserEvents();
     setupMessageEvents();
     setupFileEvents();
+    listenOpenURL();
 }
 
 
@@ -56,6 +57,14 @@ function setupWidgetEvents() {
   window.fdWidget.on("widget:destroyed", function() {
     console.log('Widget Destroyed');
     webkit.messageHandlers.widgetDestroyed.postMessage();
+  });
+  window.fdWidget.on("widget:hide_widget", function(resp) {
+    console.log('Widget Hide');
+    webkit.messageHandlers.hideWidget.postMessage(resp);
+  });
+  window.fdWidget.on("widget:minimize_widget", function(resp) {
+    console.log('Widget Minimize');
+    webkit.messageHandlers.minimizeWidget.postMessage(resp);
   });
 }
 
@@ -114,6 +123,13 @@ function listenUnreadCountChanged() {
     window.fdWidget.on("unreadCount:notify", function(resp) {
         log.d("Unread count changed");
         webkit.messageHandlers.unreadCountChanged.postMessage(resp);
+    });
+}
+
+function listenOpenURL() {
+    window.fdWidget.on("widget:open_url", function(resp) {
+        console.log('Open URL');
+        webkit.messageHandlers.openUrl.postMessage(resp);
     });
 }
 
