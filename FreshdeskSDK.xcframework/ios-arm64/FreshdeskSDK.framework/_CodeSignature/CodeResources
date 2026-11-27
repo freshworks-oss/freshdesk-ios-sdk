@@ -14,11 +14,11 @@
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		IaNGnt8GXJDEPbqWE5Ot5pEhxjs=
+		l6Q5rAlWgXm62fhy1yUQeH9FTdg=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		hZpIdP9Vzeh4neOw5Ts7yolpWq0=
+		R2/aGSyJIfpgM/b22Wu/HtgPai8=
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		hZpIdP9Vzeh4neOw5Ts7yolpWq0=
+		R2/aGSyJIfpgM/b22Wu/HtgPai8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>script.js</key>
 		<data>
-		IcnYAgOG/TGd09/xTodcn/8YZLE=
+		IyVoTEytbrX8pK5GlqIx0Z2fz8A=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -58,14 +58,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xfAXgUyZq7fpScR45r6xV/+hUc/2AiyDqfYMJ6GM5Aw=
+			hQjVLsdrzHPuSN81j3lwbME/f/RC6DwFAlHdTb9BMS4=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z48Q0mWvlb4H/jc8zDRxmi2MqR42v3Qeya9504fiJf0=
+			u0X4ZOfjeL2Gnfk6XoG8zw3JYhkTVu5K60gGEf8mHVk=
 			</data>
 		</dict>
 		<key>Modules/FreshdeskSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -79,7 +79,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z48Q0mWvlb4H/jc8zDRxmi2MqR42v3Qeya9504fiJf0=
+			u0X4ZOfjeL2Gnfk6XoG8zw3JYhkTVu5K60gGEf8mHVk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -107,7 +107,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			gZUL1QiYlDsD+YAsUKcZ4EbOjLJcte7UGS2QQon2pDY=
+			m/HOHVF7iwEMKUWPBgm/GbgpwooKp0YkP8GnzFEfmWs=
 			</data>
 		</dict>
 	</dict>

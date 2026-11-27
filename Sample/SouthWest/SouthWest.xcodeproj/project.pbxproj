@@ -73,6 +73,7 @@
 		97DE59522E756ED3000E5526 /* ShowUserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DE59512E756ED3000E5526 /* ShowUserDetailsView.swift */; };
 		ADE3A1E02B6000B900C84D77 /* PropertiesViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE3A1DF2B6000B900C84D77 /* PropertiesViewData.swift */; };
 		E4FA97652C34100300B3B52F /* PreChatFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FA97642C34100300B3B52F /* PreChatFormView.swift */; };
+		F9C7BB2E30188029006BA540 /* InAppWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C7BB2D30188029006BA540 /* InAppWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +145,7 @@
 		97DE59512E756ED3000E5526 /* ShowUserDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowUserDetailsView.swift; sourceTree = "<group>"; };
 		ADE3A1DF2B6000B900C84D77 /* PropertiesViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesViewData.swift; sourceTree = "<group>"; };
 		E4FA97642C34100300B3B52F /* PreChatFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreChatFormView.swift; sourceTree = "<group>"; };
+		F9C7BB2D30188029006BA540 /* InAppWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				56A3A56C2B21BF05000177FA /* ViewController.swift */,
+				F9C7BB2D30188029006BA540 /* InAppWebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				56A3A5732B21BF05000177FA /* ChangeAccountView.swift in Sources */,
 				56A3A5772B21BF05000177FA /* UserDetails.swift in Sources */,
 				E4FA97652C34100300B3B52F /* PreChatFormView.swift in Sources */,
+				F9C7BB2E30188029006BA540 /* InAppWebViewController.swift in Sources */,
 				191DD9B62B232EF000D96481 /* LogUserEventView.swift in Sources */,
 				56A5C2CB2AF9074C00736CF5 /* LoginView.swift in Sources */,
 				19D8CB632B31C51F002441A0 /* UpdateConvOrBotAttributesView.swift in Sources */,

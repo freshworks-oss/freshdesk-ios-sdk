@@ -572,6 +572,26 @@ struct Constants {
                                              """
         }
         
+        struct setBotVariables {
+            static let title = "Set Bot Variables"
+            static let subheading = ""
+            static let textEditor = "Bot Variables"
+            static let textEditorPlaceholder = "Enter Bot variables json string here"
+            static let textEditorDescription = """
+                                             Please enter the Bot variables data in the below json string format.
+                                             {
+                                                "orderNumber": "998877",
+                                                "orderName": "Laptop",
+                                                "customBotName": "Chitti Bot",
+                                                "fd_override_bot_property": {
+                                                   "20": {
+                                                      "orderNumber": "1301"
+                                                   }
+                                                }
+                                             }
+                                             """
+        }
+        
         struct Configurations {
             static let title = "Configurations"
             static let subheading = ""
@@ -638,6 +658,7 @@ struct Constants {
         static let tagsSelectOption = "fw_tagsSelectOption"
         static let ticketProperties = "fw_ticketProperties"
         static let userProperties = "fw_userProperties"
+        static let botVariables = "fw_botVariables"
         static let headerProperty = "fw_headerProperty"
         static let contentProperty = "fw_contentProperty"
         static let contentConfiguration = "fw_contentConfiguration"

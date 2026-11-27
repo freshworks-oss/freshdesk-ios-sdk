@@ -84,6 +84,33 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
         Freshdesk.resetUser()
     ```
 
+### Bot variables
+- To pass variables to the bot (Make sure that variable names match the ones configured in your bot builder). Call this before launching the support experience so the bot can use the values in its flow. If support can be opened right after app launch, call it as early as possible after `initialize`: until the widget has loaded, the SDK doesn't guarantee that the variables arrive before the bot starts.
+    ```swift
+        // Compose bot variables and pass them to setBotVariables API
+        let botVariables: [String: Any] = [
+                            "customername": "Mobile iOS SDK",
+                            "customnumber": 123
+        ]
+
+        // Pass the dictionary to Freshdesk API
+        Freshdesk.setBotVariables(with: botVariables)
+        Freshdesk.openSupport(self)
+    ```
+- To override variables for a specific topic, add them under the reserved key `fd_override_bot_property`, keyed by the topic id (the same id `openTopic` uses). Values under a topic id take precedence over the top-level values for that topic.
+    ```swift
+        let botVariables: [String: Any] = [
+                            "customername": "Mobile iOS SDK",
+                            "fd_override_bot_property": [
+                                "topic-id": [
+                                    "customername": "Mobile iOS SDK Override"
+                                ]
+                            ]
+        ]
+        Freshdesk.setBotVariables(with: botVariables)
+    ```
+    Note: The dictionary must be JSON serializable (`String`, `Int`, `Double`, `Bool`, nested dictionaries/arrays). If it can't be serialized, the SDK logs an error and the variables are not set.
+
 ### Launch the support experience
 Note: self --> current viewcontroller
 - Support Home

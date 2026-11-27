@@ -10,9 +10,9 @@ import Foundation
 // MARK: Update here with account specific information.
 struct Configurations {
     struct Account {
-        static let token = "01KB1QYRKZM78J7XQ723K0BYM9"
-        static let host = "https://harishkumaromnitest.freshdesk.com"
-        static let sdkId = "01KX2W2Z4MMWMN7RGKSATYXJS8"
+        static let token = ""
+        static let host = ""
+        static let sdkId = ""
         static let locale = ""
         static let jwt = ""
     }

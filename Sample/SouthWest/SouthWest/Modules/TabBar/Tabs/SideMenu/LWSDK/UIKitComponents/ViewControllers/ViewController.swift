@@ -137,13 +137,12 @@ final class ViewController: UIViewController {
     @IBAction func enableCustomLinksHandler(_ sender: Any) {
         customLinkButton.setTitle(" Custom Link : Enabled", for: .normal)
         Freshdesk.setCustomLinkHandler { url in
-            print("Link tapped: \(url)")
-            // Custom handling logic
-            if url.absoluteString.hasPrefix("freshdesk://") {
-                self.showToast(message: "Deeplink URL tapped: \(url.host ?? url.absoluteString)")
-                return
+            DispatchQueue.main.async {
+                let webVC = InAppWebViewController(url: url)
+                let navVC = UINavigationController(rootViewController: webVC)
+                navVC.modalPresentationStyle = .fullScreen
+                UIApplication.topView?.present(navVC, animated: true)
             }
-            self.showToast(message: "Custom link handler: \(url.host ?? url.absoluteString)")
         }
     }
     
@@ -256,9 +255,7 @@ extension ViewController {
         present(updateUserDetailsView)
     }
     
-    
     @IBAction func didTapGetUser(_ sender: UIButton) {
-        
         Freshdesk.getUser { user in
             print(user)
             let userDetailsString = SWUtilMethods.convertToJsonString(from: user)
@@ -267,6 +264,38 @@ extension ViewController {
             }
             self.present(showUserDetailsView)
         }
+    }
+    
+    @IBAction func setBotVariables(_ sender: UIButton) {
+        let botVariablesViewData = PropertiesViewModelData(
+            title: Constants.Features.setBotVariables.title,
+            subheading: Constants.Features.setBotVariables.subheading,
+            textEditor: Constants.Features.setBotVariables.textEditor,
+            textEditorPlaceholder: Constants.Features.setBotVariables.textEditorPlaceholder,
+            textEditorDescription: Constants.Features.setBotVariables.textEditorDescription
+        )
+        let botVariablesString = UserDefaults.standard.string(forKey: Constants.UserDefaultsKeys.botVariables) ?? Constants.Characters.emptyString
+        
+        let updateBotVariablesView = UpdateConvOrBotAttributesView(didDismiss: { [weak self] (botVariablesJsonString, isSetBotVariables) in
+            guard let self else { return }
+            
+            if let botVariables = SWUtilMethods.convertToJsonDictionary(from: botVariablesJsonString) {
+                self.dismiss(animated: false) {
+                    if isSetBotVariables {
+                        Freshdesk.setBotVariables(with: botVariables)
+                        UserDefaults.standard.set(botVariablesJsonString, forKey: Constants.UserDefaultsKeys.botVariables)
+                    }
+                }
+            } else {
+                if isSetBotVariables {
+                    self.showToast(message: Constants.Toast.invalidJson)
+                } else {
+                    self.dismiss(animated: false)
+                }
+            }
+        }, attributesString: botVariablesString, propertiesViewAttributes: botVariablesViewData)
+        
+        present(updateBotVariablesView)
     }
     
     @IBAction func didTapIdentifyUser(_ sender: UIButton) {

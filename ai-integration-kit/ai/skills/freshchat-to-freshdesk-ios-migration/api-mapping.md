@@ -42,7 +42,7 @@ Grep the customer's code for the left-hand column; the right-hand columns tell y
 | `updateConversationBannerMessage(_:)` | **Gap** | none — static copy only via `ContentConfiguration.headers` | [§Opening the UI](#opening-the-sdk-ui) |
 | `sendMessage(FreshchatMessage)` — tag form (`FreshchatMessage(message:andTag:)`) | **Changed** (tag → topic) | `messageToTopic(_:topicName:message:isDraft:)` or `messageToTopic(_:topicId:message:isDraft:)` — **topic-based, not tag-based**; pass `isDraft: false` to send | [§Messaging and bots](#messaging-and-bots) |
 | `sendMessage(FreshchatMessage)` — reference-ID form (`ConversationOptions`/`conversationReferenceID`) | **Gap** (partial) | `messageToTopic` targets a topic only; no per-reference thread | [§Messaging and bots](#messaging-and-bots) |
-| `setBotVariables(_:withBotSpecificVariables:)` | **Gap** | none — workaround via `setUserDetails`/`setTicketProperties` | [§Messaging and bots](#messaging-and-bots) |
+| `setBotVariables(_:withBotSpecificVariables:)` | **Changed** (two dictionaries → one) | `setBotVariables(with:)` — bot-specific values move under the reserved key `fd_override_bot_property`, keyed by Freshdesk **topic id** | [§Messaging and bots](#messaging-and-bots) |
 | `unreadCount(completion:)` | Replace | `getUnreadCount() -> Int` — **now synchronous** | [§Unread count](#unread-count) |
 | `FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED` | Replace | `FDEvents.unreadCount`, `object` = `Int` | [§Unread count](#unread-count) |
 | `unreadCount(forTags:completion:)` | **Gap** | none | [§Unread count](#unread-count) |
@@ -271,9 +271,40 @@ Migration rules:
 - **Topic must exist.** If the topic name/id doesn't exist in the portal, the widget may fall back to the Support Home screen.
 - To confirm a send happened, observe `FDEvents.messageSent` (see §Events) — it is broadcast only when `isDraft: false` actually sends.
 
-### Bots and banners
+### `setBotVariables` → `setBotVariables(with:)`
 
-- `setBotVariables(_:withBotSpecificVariables:)`: no equivalent. Workaround: pass the same values via `setUserDetails`/`setTicketProperties` (whitelisted in the portal) and reference them from bot/automation rules server-side — confirm with the Freshdesk admin that the bot flows can actually read those fields.
+Freshchat takes two dictionaries: variables for every bot, and bot-specific variables keyed per Freshchat bot. Freshdesk takes **one** dictionary. The shared variables stay at the top level, and the bot-specific ones move under the reserved key `fd_override_bot_property`, keyed by Freshdesk **topic id**. Values under a topic id take precedence over the top-level values for that topic.
+
+```swift
+// Before
+Freshchat.sharedInstance().setBotVariables(
+    ["customername": "Jane", "plan": "gold"],
+    withBotSpecificVariables: ["orders-bot": ["plan": "priority"]])
+
+// After — one dictionary; bot-specific values keyed by Freshdesk topic id
+Freshdesk.setBotVariables(with: [
+    "customername": "Jane",
+    "plan": "gold",
+    "fd_override_bot_property": [
+        "20": ["plan": "priority"]   // "20" = Freshdesk topic id, as a String key
+    ]
+])
+Freshdesk.openSupport(self)
+```
+
+Signature: `func setBotVariables(with botVariables: [String: Any])`.
+
+Migration rules:
+
+- **Bot → topic is a mapping question, not a rename.** Freshchat's bot-specific keys name Freshchat bots, which don't exist in Freshdesk. Ask the user which Freshdesk topic id (the same id `openTopic(_:topicId:)` takes) replaces each one. Never derive a topic id from the Freshchat key. If the mapping is unknown, migrate the shared variables and leave a `FRESHCHAT-MIGRATION-GAP` marker for the bot-specific part (see [examples.md](examples.md) Example 5).
+- **No bot-specific variables → no override key.** If `withBotSpecificVariables:` was empty, pass only the shared variables.
+- **Variable names must match the Freshdesk bot builder.** Names used by the Freshchat bot don't carry over. Confirm with the Freshdesk admin that each variable exists in the Freshdesk bot flow.
+- **JSON-safe values only.** Use `String`, `Int`, `Double`, `Bool`, and nested arrays or dictionaries with `String` keys. Convert `Date` to an ISO-8601 string. Write topic ids as `String` keys (`"20"`, not `20`), even though `openTopic` takes an `Int`. Anything else makes the SDK log an error and drop the whole call.
+- **Works when JWT is enforced.** Unlike `setUserDetails`/`setTicketProperties`, this call still runs under JWT enforcement. Don't move bot variables into the JWT payload.
+- **Call it after `initialize`, as early as you can.** Calls made before the widget has loaded are queued and run when it finishes loading. Until they have run, the SDK doesn't guarantee that they arrive before an `openSupport`, `openTopic` or `messageToTopic` call (for example one made right after app launch, or while the widget is finishing loading), so the bot can start without the variables. Later calls run in the order you make them, so once the widget has loaded, calling `setBotVariables` just before opening the UI is fine.
+
+### Conversation banner
+
 - `updateConversationBannerMessage(_:)`: no equivalent. Static copy only, via `ContentConfiguration.headers` — there is no dynamic per-session banner.
 
 ## Unread count
@@ -374,6 +405,8 @@ Freshdesk.setCustomLinkHandler { url in
 
 **Behavioral trap, not just a rename.** The Freshchat handler could fall back to default SDK behavior by returning `false`. Freshdesk's closure returns `Void` — once set, every URL is the app's responsibility. A migrated handler that no-ops on an unrecognized URL turns that link dead. Always keep a default branch that opens the URL. Verified: the handler is held **strongly** and is not gated by initialization (you may set it before `initialize`), unlike the equivalent on Android — watch for retain cycles, use `[weak self]` where relevant.
 
+**Bots use this handler too.** When a structured bot asks the SDK to open a URL, the SDK passes it to the handler, or to `UIApplication.shared.open` if no handler is set. The default branch above covers these URLs as well.
+
 **Attachments open in Safari.** `WKUIDelegate.createWebViewWith` routes any new-tab request — including file attachments — to `UIApplication.shared.open(url:...)` unless a custom link handler is set (in which case the custom handler receives it instead). This is not configurable; Freshchat displayed attachments in a native in-app viewer. Flag it as a visible UX regression, don't try to route around it in code.
 
 ## Theming and appearance
@@ -446,7 +479,7 @@ These `FreshchatConfig` properties have **no `FreshdeskSDKConfig` counterpart**.
 | `stringsBundle` | nil | `ContentConfiguration` + init-only `locale` |
 | `domain` | — | Replaced by `host` (full portal URL) |
 
-## Appendix — Freshchat APIs confirmed absent from Freshdesk 1.4.2 (tag-based `sendMessage` is now covered by `messageToTopic` — see §Messaging and bots)
+## Appendix — Freshchat APIs confirmed absent from Freshdesk 1.4.2 (tag-based `sendMessage` is now covered by `messageToTopic`, and `setBotVariables` by `setBotVariables(with:)` — see §Messaging and bots)
 
 Consolidated planning list. Every one of these needs the [Gap comment template](SKILL.md#gap-comment-template), not a rewrite:
 
@@ -454,7 +487,6 @@ Consolidated planning list. Every one of these needs the [Gap comment template](
 |---|---|
 | `identifyUser(withExternalID:restoreID:)` | Identity |
 | `getUserIdTokenStatus()` | Identity |
-| `setBotVariables(_:withBotSpecificVariables:)` | Bots |
 | `sendMessage(_:)` with a conversation reference ID (per-reference thread) | Messaging |
 | `ConversationOptions.filter(byTags:withTitle:)` | Filtering |
 | `ConversationOptions.setTopicName(_:withReferenceID:)` | Parallel conversations |
